@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ergothérapeute - Accompagnement personnalisé</title>
+    <meta name="description" content="Ergothérapeute diplômée, accompagnement personnalisé pour améliorer votre autonomie au quotidien. Consultation sur rendez-vous.">
+    <meta name="keywords" content="ergothérapeute, rééducation, autonomie, handicap, adaptation">
+    <link rel="canonical" href="https://votre-domaine.com">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="/style.css" as="style">
+    <link rel="preload" href="/script.js" as="script">
+    
+    <!-- CSS inline pour éviter le FOUC -->
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
+        .loading{opacity:0;transition:opacity .3s}
+        .loaded{opacity:1}
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+    <!-- Header avec navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Ergothérapeute</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#accueil" class="nav-link active" data-section="accueil">Accueil</a></li>
+                <li><a href="#profession" class="nav-link" data-section="profession">La profession</a></li>
+                <li><a href="#cabinet" class="nav-link" data-section="cabinet">Le cabinet</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menu">☰</button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Section Accueil -->
+        <section id="accueil" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Votre autonomie, notre priorité</h2>
+                    <p>Ergothérapeute diplômée d'État, je vous accompagne vers une meilleure qualité de vie au quotidien.</p>
+                    <button class="cta-btn" data-section="contact">Prendre rendez-vous</button>
+                </div>
+                <div class="hero-image">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmOGZmIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2MzY2ZjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5FcmdvdGjDqXJhcGV1dGU8L3RleHQ+PC9zdmc+" alt="Ergothérapeute au travail" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Profession -->
+        <section id="profession" class="section">
+            <div class="container">
+                <h2>L'ergothérapie, qu'est-ce que c'est ?</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>L'ergothérapie est une profession de santé qui évalue et traite les personnes afin de préserver et développer leur indépendance et leur autonomie dans leur environnement quotidien et social.</p>
+                        
+                        <h3>Mes domaines d'intervention :</h3>
+                        <ul>
+                            <li>Troubles neurologiques et handicap moteur</li>
+                            <li>Rééducation de la main</li>
+                            <li>Adaptation du domicile et du poste de travail</li>
+                            <li>Aide technique et appareillage</li>
+                            <li>Troubles cognitifs et mémoire</li>
+                        </ul>
+                        
+                        <h3>Pour qui ?</h3>
+                        <p>Enfants, adolescents, adultes et personnes âgées présentant des difficultés temporaires ou durables.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM0Yjc2ODgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbnRlcnZlbnRpb25zPC90ZXh0Pjwvc3ZnPg==" alt="Interventions ergothérapie" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Cabinet -->
+        <section id="cabinet" class="section">
+            <div class="container">
+                <h2>Le Cabinet</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Un espace adapté</h3>
+                        <p>Le cabinet est situé au cœur de la ville, facilement accessible en transport en commun et dispose d'un parking à proximité.</p>
+                        
+                        <div class="location-info">
+                            <h4>📍 Adresse :</h4>
+                            <address>
+                                123 Rue de la Santé<br>
+                                75000 Ville<br>
+                                France
+                            </address>
+                            
+                            <h4>🚇 Accès :</h4>
+                            <ul>
+                                <li>Métro : Ligne 1 - Station République</li>
+                                <li>Bus : Lignes 20, 65, 96</li>
+                                <li>Parking : 2 places PMR disponibles</li>
+                            </ul>
+                            
+                            <h4>⏰ Horaires :</h4>
+                            <ul>
+                                <li>Lundi - Vendredi : 9h00 - 18h00</li>
+                                <li>Samedi : 9h00 - 12h00</li>
+                                <li>Sur rendez-vous uniquement</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="content-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjlmYWZiIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2MzY2ZjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5DYWJpbmV0PC90ZXh0Pjwvc3ZnPg==" alt="Cabinet d'ergothérapie" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact & Prise de rendez-vous</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="nom">Nom *</label>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motif">Motif de consultation *</label>
+                        <select id="motif" name="motif" required>
+                            <option value="">Sélectionner un motif</option>
+                            <option value="evaluation">Évaluation initiale</option>
+                            <option value="reeducation">Rééducation</option>
+                            <option value="adaptation">Adaptation du domicile</option>
+                            <option value="aide-technique">Aide technique</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="urgence">Degré d'urgence</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="urgence" value="normal"> Normal</label>
+                            <label><input type="radio" name="urgence" value="urgent"> Urgent</label>
+                            <label><input type="radio" name="urgence" value="tres-urgent"> Très urgent</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Tranche d'âge</label>
+                        <select id="age" name="age">
+                            <option value="">Non précisé</option>
+                            <option value="enfant">Enfant (0-12 ans)</option>
+                            <option value="adolescent">Adolescent (13-17 ans)</option>
+                            <option value="adulte">Adulte (18-64 ans)</option>
+                            <option value="senior">Senior (65+ ans)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message complémentaire</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Envoyer la demande</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Développé par CND. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
