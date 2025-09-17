@@ -47,7 +47,14 @@ class ContactForm {
         if (!this.validateForm(data)) return;
         const emailBody = this.generateEmailBody(data), subject = `Demande de rendez-vous - ${data.motif}`;
         const mailtoUrl = `${config.emailService}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-        try { window.location.href = mailtoUrl; this.showSuccess(); this.form.reset(); } catch { this.showError('Erreur lors de l\'ouverture du client mail'); }
+        try { 
+            window.location.href = mailtoUrl; 
+            setTimeout(() => {
+                this.showSuccess(); 
+                this.form.reset();
+                $$('input, select, textarea').forEach(field => field.style.borderColor = '');
+            }, 500);
+        } catch { this.showError('Erreur lors de l\'ouverture du client mail'); }
     }
     generateEmailBody(data) {
         return `Nouvelle demande de rendez-vous
@@ -84,8 +91,23 @@ Formulaire envoyé via le site web`;
         field.style.borderColor = 'var(--success)'; return true;
     }
     isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-    showSuccess() { alert('Votre demande va être envoyée par email. Merci !'); }
-    showError(message) { alert('Erreur: ' + message); }
+    showSuccess() { 
+        this.showMessage('✅ Votre demande a été transmise avec succès ! Je vous recontacterai rapidement pour convenir d\'un rendez-vous.', 'success'); 
+    }
+    showError(message) { 
+        this.showMessage('❌ Erreur: ' + message, 'error'); 
+    }
+    showMessage(text, type) {
+        const existing = $('.form-message');
+        if (existing) existing.remove();
+        
+        const message = document.createElement('div');
+        message.className = `form-message ${type}`;
+        message.innerHTML = text;
+        this.form.appendChild(message);
+        
+        setTimeout(() => message.remove(), 8000);
+    }
 }
 
 class SEO {
