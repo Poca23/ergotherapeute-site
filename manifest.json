@@ -1,19 +1,33 @@
 {
-    "name": "Cabinet d'Ergothérapie",
+    "name": "Cabinet d'Ergothérapie Edwina Decherf",
     "short_name": "Ergothérapie",
-    "description": "Site du cabinet d'ergothérapie - Prise de rendez-vous",
+    "description": "Cabinet d'ergothérapie Edwina Decherf - Prise de rendez-vous et consultations",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#6366f1",
+    "theme_color": "#7BC142",
     "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%236366f1'/%3E%3Ctext x='96' y='105' font-size='96' text-anchor='middle' fill='white'%3E⚕%3C/text%3E%3C/svg%3E",
+            "src": "/images/Logo-ergo-decherf-removebg-preview.png",
             "sizes": "192x192",
-            "type": "image/svg+xml"
+            "type": "image/png"
+        },
+        {
+            "src": "images/Logo-ergo-decherf-removebg-preview.png",
+            "sizes": "512x512",
+            "type": "image/png"
         }
     ],
     "lang": "fr",
-    "dir": "ltr"
+    "dir": "ltr",
+    "categories": ["health", "medical"],
+    "screenshots": [
+        {
+            "src": "images/Logo-ergo-decherf.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ]
 }
