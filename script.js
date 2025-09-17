@@ -1,4 +1,13 @@
-const config = { emailService: 'mailto:edwinadecherf@gmail.com', lang: 'fr' };
+const config = { 
+    emailService: 'mailto:edwinadecherf@gmail.com', 
+    emailjs: {
+        publicKey: 'atEnZgePdH88zB9jU',
+        serviceId: 'service_do1z2ic',
+        templateId: 'template_sjc6l0i'
+    },
+    lang: 'fr' 
+};
+
 const state = { currentSection: 'accueil', isMenuOpen: false, isLoading: true };
 const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
 
@@ -37,25 +46,76 @@ class MobileMenu {
 }
 
 class ContactForm {
-    constructor() { this.form = $('#contactForm'); this.init(); }
+    constructor() { this.form = $('#contactForm'); this.loadEmailJS(); this.init(); }
+    
+    async loadEmailJS() {
+        if (typeof emailjs === 'undefined') {
+            try {
+                await this.loadScript('https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js');
+                emailjs.init(config.emailjs.publicKey);
+            } catch (error) {
+                console.warn('EmailJS non disponible, utilisation du fallback mailto');
+            }
+        }
+    }
+    
+    loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    
     init() {
         this.form?.addEventListener('submit', async e => { e.preventDefault(); await this.handleSubmit(); });
         this.form?.querySelectorAll('input, select, textarea').forEach(field => field.addEventListener('blur', () => this.validateField(field)));
     }
+    
     async handleSubmit() {
         const formData = new FormData(this.form), data = Object.fromEntries(formData.entries());
         if (!this.validateForm(data)) return;
-        const emailBody = this.generateEmailBody(data), subject = `Demande de rendez-vous - ${data.motif}`;
+        
+        this.showLoader();
+        
+        try {
+            if (typeof emailjs !== 'undefined') {
+                await emailjs.send(
+                    config.emailjs.serviceId,
+                    config.emailjs.templateId,
+                    data
+                );
+                this.showSuccess();
+            } else {
+                this.fallbackToMailto(data);
+            }
+            
+            this.form.reset();
+            $$('input, select, textarea').forEach(field => field.style.borderColor = '');
+            
+        } catch (error) {
+            console.error('Erreur EmailJS:', error);
+            this.fallbackToMailto(data);
+        } finally {
+            this.hideLoader();
+        }
+    }
+    
+    fallbackToMailto(data) {
+        const emailBody = this.generateEmailBody(data);
+        const subject = `Demande de rendez-vous - ${data.motif}`;
         const mailtoUrl = `${config.emailService}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+        
         try { 
             window.location.href = mailtoUrl; 
-            setTimeout(() => {
-                this.showSuccess(); 
-                this.form.reset();
-                $$('input, select, textarea').forEach(field => field.style.borderColor = '');
-            }, 500);
-        } catch { this.showError('Erreur lors de l\'ouverture du client mail'); }
+            setTimeout(() => this.showSuccess(), 500);
+        } catch { 
+            this.showError('Erreur lors de l\'ouverture du client mail'); 
+        }
     }
+    
     generateEmailBody(data) {
         return `Nouvelle demande de rendez-vous
 
@@ -75,6 +135,7 @@ ${data.message || 'Aucun message complémentaire'}
 ---
 Formulaire envoyé via le site web`;
     }
+    
     validateForm(data) {
         const errors = [];
         if (!data.nom?.trim()) errors.push('Le nom est requis');
@@ -84,19 +145,40 @@ Formulaire envoyé via le site web`;
         if (errors.length > 0) { this.showError(errors.join('\n')); return false; }
         return true;
     }
+    
     validateField(field) {
         field.style.borderColor = '';
         if (field.required && !field.value.trim()) { field.style.borderColor = 'var(--error)'; return false; }
         if (field.type === 'email' && field.value && !this.isValidEmail(field.value)) { field.style.borderColor = 'var(--error)'; return false; }
         field.style.borderColor = 'var(--success)'; return true;
     }
+    
     isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+    
+    showLoader() {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>⏳</span> Envoi en cours...';
+        }
+    }
+    
+    hideLoader() {
+        const submitBtn = this.form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>📧</span> Envoyer ma demande';
+        }
+    }
+    
     showSuccess() { 
         this.showMessage('✅ Votre demande a été transmise avec succès ! Je vous recontacterai rapidement pour convenir d\'un rendez-vous.', 'success'); 
     }
+    
     showError(message) { 
         this.showMessage('❌ Erreur: ' + message, 'error'); 
     }
+    
     showMessage(text, type) {
         const existing = $('.form-message');
         if (existing) existing.remove();
