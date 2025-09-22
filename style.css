@@ -72,7 +72,6 @@ body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; line-heigh
 
 .pricing-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
 .info-section { background: var(--bg-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary); }
-.info-section.warning { color: #ef4444; border-left-color: var(--warning); }
 .info-section h3 { color: var(--text); margin-bottom: 1rem; }
 .info-section ul { margin-left: 1rem; }
 .info-section li { margin-bottom: 0.5rem; }
