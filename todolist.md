@@ -111,8 +111,3 @@ Avenue Jules Edouard Menard
 **Objectif** : Obtenir une **version 1.0 fonctionnelle** correspondant aux besoins réels de la cliente ergothérapeute.
 
 ---
-
-**Informations d'accès**
-Maison De Santé Pluri. De St Gervais Les Trois Clochers
-Avenue Jules Edouard Menard
-86230 Saint Gervais Les Trois Clochers
