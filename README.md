@@ -9,7 +9,7 @@
 - **Single Page Application (SPA)** with smooth section navigation
 - **Progressive Web App (PWA)** - installable on mobile and desktop
 - **Responsive Design** with mobile-first approach
-- **Contact Form** with real-time validation
+- **Contact Form** with real-time validation and EmailJS integration
 - **SEO Optimized** with dynamic meta tags and JSON-LD schema
 - **Performance Optimized** with lazy loading and code splitting
 
@@ -21,6 +21,7 @@
 |------------|---------------|
 | **Frontend** | HTML5, CSS3, Vanilla JavaScript (ES6+) |
 | **Architecture** | SPA with hash-based routing |
+| **Email Service** | EmailJS for contact form submissions |
 | **PWA** | Service Worker + Web App Manifest |
 | **Build** | No build tools - optimized vanilla code |
 
@@ -57,7 +58,7 @@
 ### ⚡ JavaScript Classes
 - `Navigation` - SPA routing and section management
 - `MobileMenu` - Mobile navigation toggle
-- `ContactForm` - Form validation and submission
+- `ContactForm` - Form validation, submission and EmailJS integration
 - `Performance` - Lazy loading and optimization
 - `SEO` - Dynamic meta tags and structured data
 
@@ -84,6 +85,11 @@
 - Installable app experience
 - Native-like performance
 
+### 📧 Email Integration
+- EmailJS service for reliable email delivery
+- Client-side form processing without backend
+- Real-time form validation and submission feedback
+
 ### 🔍 SEO & Accessibility
 - Semantic HTML5 structure
 - Dynamic page titles and descriptions
@@ -94,7 +100,7 @@
 - Lazy loading for images
 - Debounced resize handlers
 - Minimal CSS and JavaScript footprint
-- No external dependencies
+- No external dependencies (except EmailJS)
 
 ---
 
