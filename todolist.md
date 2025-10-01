@@ -29,7 +29,7 @@
   - Maison de santé pluridisciplinaire
   - Adresse complète
 **Informations d'accès**
-Maison De Santé Pluri. De St Gervais Les Trois Clochers
+Maison De Santé Pluridisciplinaire
 Avenue Jules Edouard Menard
 86230 Saint Gervais Les Trois Clochers
 
