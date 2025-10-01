@@ -237,7 +237,6 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    margin-top: 3rem;
 }
 
 .content-text h2 {
@@ -249,7 +248,7 @@ body {
 .content-text h3 {
     color: var(--accent1);
     font-size: 1.3rem;
-    margin: 2rem 0 1rem;
+    margin: 1rem 0 1rem;
 }
 
 .content-text ul {
