@@ -1,12 +1,9 @@
 🏥 Contexte du Projet - Site Web d'Ergothérapeute
-Version 1.0.5 - Section Profession Complétée • Octobre 2025
+Version 1.0.6 - Section Formation Complétée • Octobre 2025
 Développé par CND - Web Is Yours
-
 📋 Vue d'ensemble du projet
 Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwina Decherf, spécialisé en pédiatrie et gériatrie. Il s'agit d'une Single Page Application (SPA) responsive avec des capacités Progressive Web App (PWA), construite entièrement en technologies web natives.
-
 ✨ Fonctionnalités principales
-
 ✅ Single Page Application (SPA) avec navigation fluide entre sections
 ✅ Progressive Web App (PWA) - installable sur mobile et desktop
 ✅ Design responsive avec approche mobile-first
@@ -14,12 +11,14 @@ Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwi
 ✅ Optimisation SEO avec méta-tags dynamiques et schéma JSON-LD
 ✅ Optimisation des performances avec lazy loading et code splitting
 ✅ Galerie photos interactive avec navigation carrousel multi-support
-
-
+✅ Timeline de formation continue avec animations scroll reveal
 🛠️ Stack technique
+
+
 
 Technologie
 Implémentation
+
 
 
 Frontend
@@ -43,7 +42,7 @@ Aucun outil de build - code vanilla optimisé
 
 
 Galerie
-ntersection Observer API + Touch Events + Keyboard Events
+Intersection Observer API + Touch Events + Keyboard Events
 
 
 📁 Structure du projet
@@ -76,7 +75,6 @@ ntersection Observer API + Touch Events + Keyboard Events
         ├── materiel3_10_11zon.webp
         ├── plaque-praticien_11_11zon.webp
         └── Porte-cabinet-12_11zon.webp
-
 Points clés architecture :
 
 ✅ Classe générique réutilisable (Cabinet + Profession)
@@ -97,23 +95,29 @@ Défilement fluide entre sections
 Home - Présentation professionnelle et expertise ✅
 Profession - Explication de l'ergothérapie ✅ 
 Cabinet - Localisation, horaires, spécialités ✅ 
-Formation - Timeline de formation continue ⏳
+Formation - Timeline de formation continue ✅
 Tarifs - Tarifs des services et conditions de paiement ⏳
 Contact - Formulaire de contact et informations ⏳
 
 ⚡ Classes JavaScript
 
+
+
 Classe
 Fonction
 Statut
+
+
 
 Navigation
 Routage SPA et gestion des sections
 ✅
 
+
 MobileMenu
 Toggle de navigation mobile
 ✅
+
 
 ContactForm
 Validation, soumission formulaire + EmailJS
@@ -132,8 +136,7 @@ Méta-tags dynamiques et données structurées
 
 GalleryManager
 Carrousel photos avec navigation multi-support
-✅ 
-
+✅
 
 
 🎨 Système de design
@@ -177,42 +180,72 @@ Gestionnaires de redimensionnement debounced
 Empreinte CSS et JavaScript minimale
 Aucune dépendance externe (sauf EmailJS)
 
-📸 Galerie Photos Interactive (Nouveau)
-
+📸 Galerie Photos Interactive
 Navigation multi-support :
+
 🖱️ Boutons précédent/suivant
 🔘 Indicateurs de position cliquables
 ⌨️ Support clavier (flèches ← →)
 👆 Swipe tactile mobile
 
-
 Performance :
+
 Lazy loading Intersection Observer
 Préchargement des images suivantes
 Transitions fluides CSS
 
-
 Responsive :
+
 Adaptation automatique mobile/tablet/desktop
 Aspect ratio 16:9 préservé
 Boutons et indicateurs redimensionnés selon écran
 
+📜 Timeline de Formation (Nouveau)
+Structure :
+
+Timeline verticale chronologique inversée (plus récent en haut)
+Année + Titre + Organisme
+Alternance gauche/droite (desktop)
+Empilage vertical (mobile)
+
+Animations :
+
+Scroll reveal avec Intersection Observer
+Fade-in + slide progressif
+Indicateurs visuels (points colorés)
+
+Responsive :
+
+Layout adaptatif desktop/mobile
+Points centraux alignés
+Espacement optimisé
+
+
 🌐 Support navigateur
+
+
 
 Navigateur
 Version
 
+
+
 Chrome
 60+
+
 
 Firefox
 55+
 
+
 Safari
 11+
 
+
 Edge
 79+
+
+
 
 📝 Notes de développement
 Construit avec les standards web modernes en se concentrant sur :
@@ -226,7 +259,6 @@ Architecture modulaire avec classes ES6 (Mise à jour)
 
 
 📅 Informations du projet
-
 📊 État d'Avancement Actuel
 ✅ TERMINÉ
 ÉTAPE 1 - Page Accueil (100%)
@@ -240,27 +272,38 @@ Architecture modulaire avec classes ES6 (Mise à jour)
 ✅ Sous-Étape 2.1 : Titre "Accès" + adresse + accessibilité PMR
 ✅ Sous-Étape 2.2 : Horaires + services modifiés
 ✅ Sous-Étape 2.3 : Google Maps intégré avec iframe responsive
-✅ Sous-Étape 2.4 : Galerie photos cabinet (3 photos avec lazy loading) (Nouveau)
-ÉTAPE 3 - Page Profession (100%) ✨ **COMPLÉTÉE v1.0.4**
-- ✅ **Sous-Étape 3.1 : Carrousel images action** (enfants + seniors) ✨ **NOUVEAU**
-- ✅ Galerie 2 photos interactives
-- ✅ Classe `GalleryManager` refactorisée (générique)
-- ✅ Navigation multi-support (boutons + indicateurs + clavier + swipe)
-- ✅ Lazy loading + préchargement
-- ✅ Responsive adaptatif
-- ✅ Légendes dynamiques
+✅ Sous-Étape 2.4 : Galerie photos cabinet (3 photos avec lazy loading)
+
+ÉTAPE 3 - Page Profession (100%) ✨ COMPLÉTÉE
+
+✅ Sous-Étape 3.1 : Carrousel images action (enfants + seniors)
+✅ Galerie 2 photos interactives
+✅ Classe GalleryManager refactorisée (générique)
+✅ Navigation multi-support (boutons + indicateurs + clavier + swipe)
+✅ Lazy loading + préchargement
+✅ Responsive adaptatif
+✅ Légendes dynamiques
 ✅ Sous-Étape 3.2 : Texte explicatif (conservé tel quel - décision client)
+
+ÉTAPE 4 - Page Formation (100%) ✨ COMPLÉTÉE v1.0.6
+
+✅ Sous-Étape 4.1 : Timeline chronologique inversée (2025 → 2015)
+✅ Structure HTML sémantique avec années + titres + organismes
+✅ Mise en page alternée gauche/droite (desktop)
+✅ Layout empilé responsive (mobile)
+✅ Animations scroll reveal avec Intersection Observer
+✅ Indicateurs visuels (points colorés)
+✅ Transitions fluides fade-in + slide
 
 ⏳ À FAIRE
 
-ÉTAPE 4 - Page Formation (chronologie inversée)
 ÉTAPE 5 - Page Tarifs (7 modifications)
 ÉTAPE 6 - Page Contact (refonte formulaire complète)
 
 
 📈 Progression Globale
-Total : 14/27 tâches complétées (52%)
-████████████░░░░░░░░░░ 52%
+Total : 16/27 tâches complétées (59%)
+████████████░░░░░░░░░░ 59%
 
 
 
@@ -281,13 +324,13 @@ Progression
 
 
 👩‍⚕️ Profession
-⏳ En attente
-/2 (100%)
+✅ Terminée
+2/2 (100%)
 
 
 🎓 Formation
-⏳ En attente
-0/2 (0%)
+✅ Terminée
+2/2 (100%)
 
 
 💰 Tarifs
@@ -299,23 +342,25 @@ Progression
 ⏳ En attente
 0/3 (0%)
 
-Temps écoulé : 5h45
-Temps restant estimé : 5h15
-Total prévu : 11h
+
+Temps écoulé : 7h15Temps restant estimé : 3h45Total prévu : 11h
 
 🎯 Prochaine Action Immédiate
-🔴 ÉTAPE 4 - Page Formation (Timeline)
-Complexité : ⭐⭐ (Moyenne)Durée estimée : 1h30Statut : ⏳ PRÊT À DÉMARRER
+🔴 ÉTAPE 5 - Page Tarifs (Refonte complète)
+Complexité : ⭐⭐⭐ (Élevée)Durée estimée : 2h00Statut : ⏳ PRÊT À DÉMARRER
 Objectifs :
 
-Timeline formations chronologique inversée (plus récent en haut)
-Mise en valeur spécialisations clés
+Refonte structure tarifaire (7 modifications demandées)
+Mise en page claire et lisible
+Conditions de paiement actualisées
 Design responsive adaptatif
-Animation scroll reveal (optionnel)
+Mise en valeur informations importantes
 
-Version 1.0.5 • Octobre 2025
+
+Version 1.0.6 • Octobre 2025
 
 ✅ BONNES PRATIQUES APPLIQUÉES
+
 ✅ Mettre à jour Contexte.md + Feuille de route.md à chaque étape
 ✅ Donner les commandes git à chaque fin d'étape
 ✅ Pratique professionnelle - Documentation claire et structurée
