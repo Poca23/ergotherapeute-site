@@ -871,7 +871,7 @@ body {
 /* Indicateurs de position */
 .gallery-indicators {
   position: absolute;
-  bottom: 16px;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -927,19 +927,17 @@ body {
 }
 
 .profession-gallery .gallery-container {
-  max-width: 900px; /* Plus large que Cabinet pour format action */
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Adaptation hauteur pour photos action (format paysage) */
 .profession-gallery .gallery-main-image {
   aspect-ratio: 16/9;
   height: auto;
 }
 
-/* Style légende spécifique Profession */
 .profession-gallery .gallery-caption {
-  margin-top: 1.5rem;
+  margin: 1.5rem;
   text-align: center;
 }
 
@@ -1023,24 +1021,40 @@ body {
   }
 
   .gallery-indicators {
-    bottom: 12px;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+
+    .indicator {
+      width: 10px;
+      height: 10px;
+    }
   }
 
-  .indicator {
-    width: 10px;
-    height: 10px;
-  }
-}
+  @media (max-width: 480px) {
+    .gallery-nav {
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+    }
 
-@media (max-width: 480px) {
-  .gallery-nav {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
-  }
+    .gallery-caption {
+      font-size: 0.85rem;
+      padding: 0 1rem;
+    }
 
-  .gallery-caption {
-    font-size: 0.85rem;
-    padding: 0 1rem;
+    .gallery-indicators {
+      position: absolute;
+      bottom: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
   }
 }
