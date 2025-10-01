@@ -202,8 +202,38 @@
                 </div>
             </div>
             <div class="content-image">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjlmYWZiIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM4QTJCRTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5DYWJpbmV0PC90ZXh0Pjwvc3ZnPg=="
-                    alt="Cabinet d'ergothérapie Edwina Decherf" loading="lazy">
+<!-- 📸 Galerie Photos Cabinet -->
+<div class="cabinet-gallery" id="cabinetGallery">
+    <div class="gallery-container">
+        <!-- Image principale avec lazy loading -->
+        <img 
+            class="gallery-main-image lazy-load" 
+            data-src="images/photos/cabinet1_1_11zon.webp" 
+            alt="Vue d'accueil du cabinet d'ergothérapie"
+            loading="lazy"
+        >
+        
+        <!-- Navigation carrousel -->
+        <button class="gallery-nav gallery-prev" aria-label="Photo précédente">
+            <span>‹</span>
+        </button>
+        <button class="gallery-nav gallery-next" aria-label="Photo suivante">
+            <span>›</span>
+        </button>
+        
+        <!-- Indicateurs de position -->
+        <div class="gallery-indicators">
+            <button class="indicator active" data-index="0" aria-label="Photo 1"></button>
+            <button class="indicator" data-index="1" aria-label="Photo 2"></button>
+            <button class="indicator" data-index="2" aria-label="Photo 3"></button>
+        </div>
+    </div>
+    
+    <!-- Légendes des photos -->
+    <p class="gallery-caption">
+        <span class="caption-text">Salle du cabinet</span>
+    </p>
+</div>
             </div>
         </div>
     </div>
