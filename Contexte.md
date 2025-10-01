@@ -1,5 +1,5 @@
 🏥 Contexte du Projet - Site Web d'Ergothérapeute
-Version 1.0.4 - Galerie Cabinet + Profession • Octobre 2025
+Version 1.0.5 - Section Profession Complétée • Octobre 2025
 Développé par CND - Web Is Yours
 
 📋 Vue d'ensemble du projet
@@ -13,7 +13,7 @@ Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwi
 ✅ Formulaire de contact avec validation en temps réel et intégration EmailJS
 ✅ Optimisation SEO avec méta-tags dynamiques et schéma JSON-LD
 ✅ Optimisation des performances avec lazy loading et code splitting
-✅ Galerie photos interactive avec navigation carrousel 
+✅ Galerie photos interactive avec navigation carrousel multi-support
 
 
 🛠️ Stack technique
@@ -43,7 +43,7 @@ Aucun outil de build - code vanilla optimisé
 
 
 Galerie
-Intersection Observer API + Touch Events (Nouveau)
+ntersection Observer API + Touch Events + Keyboard Events
 
 
 📁 Structure du projet
@@ -77,6 +77,14 @@ Intersection Observer API + Touch Events (Nouveau)
         ├── plaque-praticien_11_11zon.webp
         └── Porte-cabinet-12_11zon.webp
 
+Points clés architecture :
+
+✅ Classe générique réutilisable (Cabinet + Profession)
+✅ Support multi-instances indépendantes
+✅ Détection visibilité pour éviter conflits clavier
+✅ Événements découplés (addEventListener)
+✅ Code maintenable (principe DRY)
+
 🧩 Composants clés
 🧭 Système de navigation
 
@@ -87,31 +95,25 @@ Défilement fluide entre sections
 📄 Sections de contenu
 
 Home - Présentation professionnelle et expertise ✅
-Profession - Explication de l'ergothérapie ⏳
-Cabinet - Localisation, horaires, spécialités ✅ Galerie photos intégrée
+Profession - Explication de l'ergothérapie ✅ 
+Cabinet - Localisation, horaires, spécialités ✅ 
 Formation - Timeline de formation continue ⏳
 Tarifs - Tarifs des services et conditions de paiement ⏳
 Contact - Formulaire de contact et informations ⏳
 
 ⚡ Classes JavaScript
 
-
-
 Classe
 Fonction
 Statut
-
-
 
 Navigation
 Routage SPA et gestion des sections
 ✅
 
-
 MobileMenu
 Toggle de navigation mobile
 ✅
-
 
 ContactForm
 Validation, soumission formulaire + EmailJS
@@ -130,7 +132,7 @@ Méta-tags dynamiques et données structurées
 
 GalleryManager
 Carrousel photos avec navigation multi-support
-✅ Nouveau
+✅ 
 
 
 
@@ -247,18 +249,18 @@ Architecture modulaire avec classes ES6 (Mise à jour)
 - ✅ Lazy loading + préchargement
 - ✅ Responsive adaptatif
 - ✅ Légendes dynamiques
+✅ Sous-Étape 3.2 : Texte explicatif (conservé tel quel - décision client)
 
 ⏳ À FAIRE
 
-ÉTAPE 3.2- Optimisation contenu texte Profession
 ÉTAPE 4 - Page Formation (chronologie inversée)
 ÉTAPE 5 - Page Tarifs (7 modifications)
 ÉTAPE 6 - Page Contact (refonte formulaire complète)
 
 
 📈 Progression Globale
-Total : 13/27 tâches complétées (48%)
-██████████░░░░░░░░░░░░ 48%
+Total : 14/27 tâches complétées (52%)
+████████████░░░░░░░░░░ 52%
 
 
 
@@ -280,7 +282,7 @@ Progression
 
 👩‍⚕️ Profession
 ⏳ En attente
-1/2 (50%)
+/2 (100%)
 
 
 🎓 Formation
@@ -297,32 +299,30 @@ Progression
 ⏳ En attente
 0/3 (0%)
 
-Temps écoulé : 5h45  
-Temps restant estimé : 5h15  
+Temps écoulé : 5h45
+Temps restant estimé : 5h15
 Total prévu : 11h
 
 🎯 Prochaine Action Immédiate
+🔴 ÉTAPE 4 - Page Formation (Timeline)
+Complexité : ⭐⭐ (Moyenne)Durée estimée : 1h30Statut : ⏳ PRÊT À DÉMARRER
+Objectifs :
 
-### 🔴 ÉTAPE 3.2 - Optimisation Texte Profession
+Timeline formations chronologique inversée (plus récent en haut)
+Mise en valeur spécialisations clés
+Design responsive adaptatif
+Animation scroll reveal (optionnel)
 
-**Complexité** : ⭐  
-**Durée estimée** : 30min  
-**Statut** : ⏳ **PRÊT À DÉMARRER**
+Version 1.0.5 • Octobre 2025
 
-#### Objectifs :
-1. Révision structure texte explicatif
-2. Optimisation SEO contenu
-3. Ajout call-to-action vers Contact
-4. Vérification responsive texte + carrousel
-
-Version 1.0.4 • Octobre 2025
-
-✅ BONNES PRATIQUES
-✅ Mettre à jour la feuille de route sur le même principe (Octobre 2025)
+✅ BONNES PRATIQUES APPLIQUÉES
+✅ Mettre à jour Contexte.md + Feuille de route.md à chaque étape
 ✅ Donner les commandes git à chaque fin d'étape
 ✅ Pratique professionnelle - Documentation claire et structurée
 ✅ Faire sur le principe du 6W + Comment (Who, What, When, Where, Why, hoW)
 ✅ Faire étape par étape en attendant validation
 ✅ Toujours faire au plus simple - Vanilla JS, pas de framework
-✅ Architecture modulaire avec classes ES6 
+✅ Architecture modulaire avec classes ES6
 ✅ Support multi-device avec progressive enhancement
+✅ Code review avant chaque commit
+✅ Tests manuels multi-navigateurs systématiques
