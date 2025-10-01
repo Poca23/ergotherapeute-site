@@ -1,317 +1,480 @@
-# 🗺️ Feuille de Route - Site Ergothérapeute
+🏥 Feuille de Route - Site Web d'Ergothérapeute
 
-## 📋 État Actuel du Projet
-**Version :** 1.0 en cours de finalisation  
-**Statut :** ✅ 9/25 tâches complétées - ÉTAPE 2 en cours  
-**Dernière mise à jour :** 26/09/2025  
-**Priorité actuelle :** Page Cabinet (Google Maps + Photos)  
+Version 1.0 • Octobre 2025Développé par CND - Web Is Yours
 
----
 
-## ✅ ÉTAPE 1 - Page Accueil (TERMINÉE)
-**Durée réelle :** 2h  
-**Complexité :** ⭐⭐  
-**Statut :** ✅ **VALIDÉE**
+📊 Vue d'Ensemble du Projet
+🎯 Objectif Principal
+Développer une Single Page Application (SPA) moderne et responsive pour le cabinet d'ergothérapie d'Edwina Decherf, spécialisé en pédiatrie et gériatrie.
+🛠️ Technologies Utilisées
 
-### Tâches Complétées
-- ✅ Image plaque d'immatriculation intégrée dans hero section
-- ✅ Logo repositionné en haut à gauche (90x70px → responsive)
-- ✅ Bouton CTA configuré pour redirection vers #contact
-- ✅ Responsive design testé sur tous supports
+Frontend : HTML5, CSS3, JavaScript Vanilla (ES6+)
+Architecture : SPA avec routage basé sur hash
+Email : EmailJS pour formulaire de contact
+PWA : Service Worker + Web App Manifest
+Build : Aucun outil - code vanilla optimisé
 
-### Livrables Validés
-- ✅ Image optimisée avec object-fit: cover
-- ✅ CSS responsive (desktop/tablette/mobile)
-- ✅ JavaScript navigation fonctionnel
 
-**Commandes Git effectuées :**
-```bash
+📈 Progression Globale
+Total : 10/25 tâches complétées (40%)
+████████░░░░░░░░░░░░░░ 40%
+
+
+
+Métrique
+Valeur
+
+
+
+⏱️ Temps écoulé
+4h30
+
+
+⏳ Temps restant
+6h30
+
+
+📅 Total prévu
+11h
+
+
+
+🗺️ Plan de Développement
+✅ ÉTAPE 1 - Page Accueil (100%) ✨
+
+
+
+Sous-étape
+Description
+Statut
+
+
+
+1.1
+Image plaque d'immatriculation
+✅
+
+
+1.2
+Repositionnement logo en haut à gauche
+✅
+
+
+1.3
+Bouton CTA vers section Contact
+✅
+
+
+Commande Git effectuée :
 git add index.html style.css images/
 git commit -m "feat: mise à jour page accueil - image plaque + repositionnement logo + CTA contact"
 git push origin main
-```
 
----
+🔄 ÉTAPE 2 - Page Cabinet (87.5%)
 
-## 🎯 ÉTAPE 2 - Page Cabinet (EN COURS - 75% COMPLÉTÉ)
-**Durée estimée :** 3h  
-**Durée écoulée :** 2h  
-**Complexité :** ⭐⭐⭐  
-**Statut :** 🔄 **EN COURS** - Sous-étapes 2.1 et 2.2 terminées
 
-### ✅ Sous-Étape 2.1 - Textes et Accès (TERMINÉE)
-**Statut :** ✅ **VALIDÉE**
-- ✅ Titre "Localisation" changé en "Accès"
-- ✅ Adresse complète Maison de Santé ajoutée
-- ✅ Informations accessibilité PMR + parking gratuit intégrées
 
-### ✅ Sous-Étape 2.2 - Horaires et Services (TERMINÉE)
-**Statut :** ✅ **VALIDÉE**
-- ✅ Consultations modifiées → "mardi et mercredi uniquement"
-- ✅ Domicile modifié → "Personnes âgées - Évaluation à domicile, aide technique"
-- ✅ "Habiletés visuelles" supprimé des spécialités
+Sous-étape
+Description
+Statut
+Complexité
 
-### 🔄 Sous-Étape 2.3 - Google Maps (EN COURS)
-**Statut :** ⏳ **À DÉMARRER**
-**Complexité :** ⭐⭐
-**Durée estimée :** 30 minutes
 
-#### Tâche à Réaliser
-- [ ] Intégrer Google Maps iframe interactif
 
-#### Plan Technique
-```html
-<!-- Approche proposée : Embed iframe simple -->
-<div class="map-container">
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=..."
-    width="100%" 
-    height="400"
-    style="border:0;" 
-    allowfullscreen="" 
-    loading="lazy">
-  </iframe>
-</div>
-```
+2.1
+Titre "Accès" + adresse + PMR
+✅
+⭐
 
-#### CSS Responsive Prévu
-```css
-.map-container {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  margin: 2rem 0;
-}
 
-.map-container iframe {
-  width: 100%;
-  min-height: 400px;
-}
+2.2
+Horaires + services modifiés
+✅
+⭐
 
-@media (max-width: 768px) {
-  .map-container iframe {
-    min-height: 300px;
-  }
-}
-```
 
-### ⏳ Sous-Étape 2.4 - Galerie Photos Cabinet (EN ATTENTE)
-**Statut :** ⏳ **EN ATTENTE**
-**Complexité :** ⭐⭐⭐
-**Durée estimée :** 30 minutes
+2.3
+Google Maps iframe responsive
+✅
+⭐⭐
 
-#### Tâches à Réaliser
-- [ ] Ajouter 3 photos cabinet (accueil, bureau, salle)
-- [ ] Implémenter lazy loading avec Intersection Observer
-- [ ] Créer système de navigation entre photos
 
-#### Architecture Technique Prévue
-```html
-<div class="cabinet-gallery">
-  <div class="gallery-item">
-    <img data-src="images/cabinet/accueil.jpg" 
-         alt="Salle d'accueil du cabinet"
-         class="lazy-load">
-    <p class="gallery-caption">Espace d'accueil</p>
-  </div>
-  <!-- 2 autres photos -->
-</div>
-```
+2.4
+Galerie photos cabinet (3 photos)
+⏳ EN COURS
+⭐⭐⭐
 
-#### JavaScript Lazy Loading
-```javascript
-// Intersection Observer pour lazy loading
-const lazyImages = document.querySelectorAll('.lazy-load');
-const imageObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src;
-      img.classList.add('loaded');
-      imageObserver.unobserve(img);
-    }
-  });
-});
-```
 
-### Progression ÉTAPE 2
-**Complété :** 6/8 tâches (75%)
-- ✅ Textes et accès : 3/3
-- ✅ Horaires et services : 3/3
-- ⏳ Google Maps : 0/1
-- ⏳ Galerie photos : 0/1
+🎯 FOCUS ACTUEL : Sous-étape 2.4 - Galerie Photos Cabinet
+⏰ Durée estimée : 45 minutes📍 Statut : PRÊT À DÉMARRER
+📋 Objectifs
 
-**Commandes Git à effectuer après ÉTAPE 2 complète :**
-```bash
-git add index.html style.css script.js images/cabinet/
-git commit -m "feat: refonte page cabinet - accès, horaires, Google Maps, galerie photos"
+ Identifier les 3 photos à utiliser
+ Remplacer l'image placeholder SVG par galerie
+ Implémenter système de navigation/carousel
+ Ajouter lazy loading avec Intersection Observer
+ Optimiser responsive mobile/desktop
+
+🖼️ Photos Disponibles
+✅ images/photos/cabinet1_1_11zon.webp  (vue accueil)
+✅ images/photos/cabinet2_2_11zon.webp  (bureau)
+✅ images/photos/cabinet4_4_11zon.webp  (salle)
+🔧 Fonctionnalités Techniques
+
+Navigation : Boutons précédent/suivant + indicateurs
+Performance : Lazy loading des images
+UX : Transition fluide entre photos
+Responsive : Adaptation mobile/tablet/desktop
+
+Commandes Git effectuées :
+# Sous-étapes 2.1 et 2.2
+git add index.html
+git commit -m "feat(cabinet): mise à jour accès, horaires et spécialités"
 git push origin main
-```
 
----
+# Sous-étape 2.3
+git add index.html style.css
+git commit -m "feat(cabinet): intégration Google Maps avec iframe responsive"
+git push origin main
+Commande Git à effectuer (2.4) :
+git add index.html style.css script.js
+git commit -m "feat(cabinet): ajout galerie photos avec lazy loading et navigation"
+git push origin main
 
-## 🎯 ÉTAPE 3 - Formulaire Contact (Priorité Critique)
-**Durée estimée :** 4h  
-**Complexité :** ⭐⭐⭐⭐⭐  
-**Statut :** ⏳ **EN ATTENTE VALIDATION ÉTAPE 2**
+⏳ ÉTAPE 3 - Page Profession (0%)
 
-### Architecture Nouvelle Structure
-```
-┌─────────────────────────────────────┐
-│  PARTIE 1 : INFORMATIONS PARENTS    │
-│  - Nom/Prénom                       │
-│  - Email                            │
-│  - Téléphone                        │
-├─────────────────────────────────────┤
-│  PARTIE 2 : INFORMATIONS ENFANT     │
-│  - Nom/Prénom enfant                │
-│  - Date de naissance                │
-│  - Classe/École                     │
-├─────────────────────────────────────┤
-│  PARTIE 3 : VOTRE DEMANDE           │
-│  - Champ libre (textarea)           │
-│  - Exemples suggestions             │
-└─────────────────────────────────────┘
-```
 
-### Tâches Techniques Détaillées
-- [ ] **HTML** - Refactoring complet structure formulaire
-- [ ] **CSS** - Mise à jour styles 3 sections distinctes
-- [ ] **JavaScript** 
-  - [ ] Validation multi-étapes
-  - [ ] Gestion erreurs par section
-  - [ ] Feedback utilisateur temps réel
-- [ ] **EmailJS**
-  - [ ] Création nouveau template email
-  - [ ] Mapping des nouveaux champs
-  - [ ] Tests d'envoi complets
 
----
+Sous-étape
+Description
+Complexité
+Durée
 
-## 🎯 ÉTAPE 4 - Pages Secondaires (Priorité Moyenne)
-**Durée estimée :** 2h  
-**Complexité :** ⭐⭐  
-**Statut :** ⏳ **EN ATTENTE**
 
-### 🏥 Page Profession
-- [ ] Développer carrousel 2-3 images interventions
-- [ ] Intégrer images : enfants + personnes âgées + stimulation cognitive
-- [ ] Optimiser transitions et responsive
 
-### 🎓 Page Formation
-- [ ] Inverser ordre chronologique des formations
-- [ ] Ajouter formation 2025-2026 en cours
-- [ ] Mise à jour style timeline
+3.1
+Carrousel d'images "action"
+⭐⭐⭐
+45 min
 
----
 
-## 🎯 ÉTAPE 5 - Page Tarifs (Priorité Basse)
-**Durée estimée :** 1h30  
-**Complexité :** ⭐⭐  
-**Statut :** ⏳ **EN ATTENTE**
+3.2
+Texte explicatif ergothérapie
+⭐
+15 min
 
-### Modifications Textes
-- [ ] Ajouter "(sous condition)" séances domicile/école
-- [ ] Supprimer "Intervention en milieu naturel"
-- [ ] Supprimer "Consultation" services principaux
-- [ ] Ajouter "Déplacement inclus 20 km" évaluation technique
-- [ ] Déplacer "Consultation" vers services complémentaires
-- [ ] Modifier "Remboursement" → "Aide financière possible"
-- [ ] Modifier paiement échelonné → "Possible pour bilan (2 fois max)"
 
----
+Photos disponibles :
 
-## 📊 Progression Globale
+images/photos/action-enfant.webp
+images/photos/action-senior.webp
 
-### Vue d'ensemble
-- **Total tâches :** 25
-- **Complétées :** 9 (36%)
-- **En cours :** 2 (8%)
-- **En attente :** 14 (56%)
+Durée totale estimée : 1h
 
-### Par Page
-| Page | Statut | Progression |
-|------|--------|-------------|
-| 🏠 Accueil | ✅ Terminée | 3/3 (100%) |
-| 🏢 Cabinet | 🔄 En cours | 6/8 (75%) |
-| 👩‍⚕️ Profession | ⏳ En attente | 0/2 (0%) |
-| 🎓 Formation | ⏳ En attente | 0/2 (0%) |
-| 💰 Tarifs | ⏳ En attente | 0/7 (0%) |
-| 📞 Contact | ⏳ En attente | 0/3 (0%) |
+⏳ ÉTAPE 4 - Page Formation (0%)
 
-### Temps
-- **Écoulé :** 4h
-- **Restant estimé :** 7h
-- **Total prévu :** 11h
 
----
 
-## 🎯 Action Immédiate - SOUS-ÉTAPE 2.3
+Sous-étape
+Description
+Complexité
+Durée
 
-### 🚀 Prochaine Action : Intégration Google Maps
 
-#### ❓ Information Requise
-**Avez-vous l'adresse exacte de la Maison de Santé ?**
-- Numéro et rue
-- Code postal
-- Ville
 
-#### 🗺️ Options Techniques
+4.1
+Timeline chronologie inversée
+⭐⭐⭐
+45 min
 
-**Option A : Embed Iframe Simple** ⭐ (Recommandé)
-- ✅ Pas d'API key nécessaire
-- ✅ Intégration rapide (10 minutes)
-- ✅ Interactivité native Google Maps
-- ✅ Responsive automatique
 
-**Option B : Google Maps API Custom**
-- ⚠️ Nécessite API key
-- ⚠️ Configuration complexe
-- ✅ Personnalisation avancée (markers custom)
+4.2
+Ajout formations récentes
+⭐
+15 min
 
-#### 📝 Démarche Proposée
-1. Vous me donnez l'adresse complète
-2. Je génère l'URL embed Google Maps
-3. J'intègre l'iframe dans la section Cabinet
-4. J'applique le CSS responsive
-5. Tests multi-devices
-6. → **Validation avant Sous-Étape 2.4**
 
-**Temps estimé : 30 minutes**
+Durée totale estimée : 1h
 
----
+⏳ ÉTAPE 5 - Page Tarifs (0%)
 
-## 📝 Notes de Développement
 
-### Bonnes Pratiques Maintenues
-✅ Validation étape par étape  
-✅ Commits Git descriptifs avec préfixe `feat:`  
-✅ Approche mobile-first  
-✅ Code vanilla optimisé  
-✅ Documentation à jour en temps réel  
 
-### Points d'Attention ÉTAPE 2
-⚠️ Google Maps : Vérifier iframe responsive sur mobile  
-⚠️ Photos cabinet : Format WebP recommandé (optimisation)  
-⚠️ Lazy loading : Tester sur connexions lentes  
+Sous-étape
+Description
+Complexité
+Durée
 
----
 
-## 📞 Contact Projet
-**Développeur :** CND - Web Is Yours  
-**Dernière validation :** 26/09/2025 - Sous-étapes 2.1 et 2.2 ✅  
-**Prochaine révision :** Après Sous-étape 2.3 (Google Maps)  
 
----
+5.1
+Refonte structure tarifs
+⭐⭐
+20 min
+
+
+5.2
+Ajout descriptions détaillées
+⭐
+15 min
+
+
+5.3
+Section "Mutuelles"
+⭐
+10 min
+
+
+5.4
+Section "Modalités paiement"
+⭐
+10 min
+
+
+5.5
+Design cartes tarifaires
+⭐⭐
+30 min
+
+
+5.6
+Icons pour chaque service
+⭐
+15 min
+
+
+5.7
+Responsive mobile
+⭐⭐
+20 min
+
+
+Durée totale estimée : 2h
+
+⏳ ÉTAPE 6 - Page Contact (0%)
+
+
+
+Sous-étape
+Description
+Complexité
+Durée
+
+
+
+6.1
+Refonte formulaire complet
+⭐⭐⭐
+1h
+
+
+6.2
+Validation temps réel EmailJS
+⭐⭐⭐
+45 min
+
+
+6.3
+Messages succès/erreur
+⭐⭐
+30 min
+
+
+Durée totale estimée : 2h15
+
+📊 Tableau Récapitulatif
+
+
+
+Étape
+Statut
+Tâches
+Progression
+Durée
+
+
+
+🏠 Accueil
+✅ Terminée
+3/3
+100%
+✅
+
+
+🏢 Cabinet
+🔄 En cours
+7/8
+87.5%
+45 min
+
+
+👩‍⚕️ Profession
+⏳ En attente
+0/2
+0%
+1h
+
+
+🎓 Formation
+⏳ En attente
+0/2
+0%
+1h
+
+
+💰 Tarifs
+⏳ En attente
+0/7
+0%
+2h
+
+
+📞 Contact
+⏳ En attente
+0/3
+0%
+2h15
+
+
+TOTAL
+40%
+10/25
+40%
+11h
+
+
+
+🎯 Prochaines Actions
+🔴 PRIORITÉ 1 - À FAIRE IMMÉDIATEMENT
+SOUS-ÉTAPE 2.4 - Galerie Photos Cabinet
+
+⏰ Durée : 45 minutes
+🎯 Objectif : Finaliser la page Cabinet à 100%
+📸 Photos : 3 images cabinet avec lazy loading
+
+🟡 PRIORITÉ 2 - APRÈS VALIDATION
+ÉTAPE 3 - Page Profession
+
+⏰ Durée : 1h
+🎯 Objectif : Carrousel images + contenu
+
+🟢 PRIORITÉ 3 - SUITE DU DÉVELOPPEMENT
+
+ÉTAPE 4 : Formation
+ÉTAPE 5 : Tarifs
+ÉTAPE 6 : Contact
+
+
+📋 Assets Disponibles
+🖼️ Images Photos Cabinet (13 fichiers)
+✅ action-enfant.webp          → Page Profession
+✅ action-senior.webp          → Page Profession
+🎯 cabinet1_1_11zon.webp       → Galerie EN COURS
+🎯 cabinet2_2_11zon.webp       → Galerie EN COURS
+⏳ cabinet3_3_11zon.webp       → Backup galerie
+🎯 cabinet4_4_11zon.webp       → Galerie EN COURS
+⏳ couloir1_5_11zon.webp       → Utilisation future
+⏳ couloir2_6_11zon.webp       → Utilisation future
+⏳ entree_7_11zon.webp         → Utilisation future
+⏳ materiel1_8_11zon.webp      → Utilisation future
+⏳ materiel2_9_11zon.webp      → Utilisation future
+⏳ materiel3_10_11zon.webp     → Utilisation future
+✅ plaque-praticien_11_11zon.webp → Page Accueil
+⏳ Porte-cabinet-12_11zon.webp → Utilisation future
+🎨 Images Branding (7 fichiers)
+✅ Logo-ergo-decherf.png
+✅ Logo-ergo-decherf-removebg-preview.png
+✅ favicon.ico
+✅ android-chrome-192x192.png
+✅ android-chrome-512x512.png
+✅ apple-touch-icon.png
+✅ favicon-16x16.png
+✅ favicon-32x32.png
+
+🎨 Design System
+🌈 Palette de Couleurs
+--primary: #7BC142      /* Vert principal */
+--accent-orange: #FF6B35
+--accent-purple: #8A2BE2
+--accent-blue: #4169E1
+--accent-pink: #FF69B4
+--text: #000000
+--background: #ffffff
+--light-gray: #f5f5f5
+📱 Breakpoints Responsive
+/* Mobile */
+@media (max-width: 480px)
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px)
+
+/* Desktop */
+@media (min-width: 769px)
+
+✅ Bonnes Pratiques
+📝 Documentation
+
+✅ Mettre à jour la feuille de route après chaque étape
+✅ Documenter selon le principe 6W (Who, What, When, Where, Why, hoW)
+✅ Garder une trace des commandes Git
+
+💻 Développement
+
+✅ Faire étape par étape avec validation
+✅ Toujours au plus simple - Vanilla JS
+✅ Pas de framework ou bibliothèque externe (sauf EmailJS)
+✅ Code propre et commenté
+✅ Performance et accessibilité prioritaires
+
+🔄 Git Workflow
+# Pattern de commits
+git add [fichiers modifiés]
+git commit -m "type(scope): description"
+git push origin main
+
+# Types: feat, fix, docs, style, refactor, perf, test
+
+📞 Informations Projet
+
+
+
+Information
+Détail
+
+
+
+👤 Client
+Cabinet Edwina Decherf
+
+
+💼 Développeur
+CND - Web Is Yours
+
+
+📅 Date de sortie
+Octobre 2025
+
+
+📌 Version
+1.0
+
+
+📄 Licence
+Propriétaire
+
+
+
+🔗 Liens Utiles
+
+📁 Fichiers projet : /index.html, /style.css, /script.js
+📋 Documentation : /README.md, /Contexte.md
+✅ Tâches : /todolist.md
+🎨 Assets : /images/, /images/photos/
+🔧 Config : /manifest.json
+
 
 <div align="center">
-  <strong>🚀 Développé avec ❤️ par CND - Web Is Yours</strong>
-  <br>
-  <em>Version 1.0 • Octobre 2025</em>
+  
+🚀 Développé avec ❤️ par CND - Web Is YoursVersion 1.0 • Octobre 2025
+Prochaine étape : SOUS-ÉTAPE 2.4 - Galerie Photos Cabinet⏰ Durée estimée : 45 minutes | 🎯 Objectif : Finaliser page Cabinet à 100%
 </div>
-
----
-
-## 🎬 DÉMARRAGE SOUS-ÉTAPE 2.3
-
-👉 **Donnez-moi l'adresse de la Maison de Santé pour intégrer Google Maps !**
