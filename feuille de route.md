@@ -1,7 +1,5 @@
 🏥 Feuille de Route - Site Web d'Ergothérapeute
-
-Version 1.0 • Octobre 2025Développé par CND - Web Is Yours
-
+Version 1.0.3 - Galerie Cabinet • Octobre 2025Développé par CND - Web Is Yours
 
 📊 Vue d'Ensemble du Projet
 🎯 Objectif Principal
@@ -13,468 +11,382 @@ Architecture : SPA avec routage basé sur hash
 Email : EmailJS pour formulaire de contact
 PWA : Service Worker + Web App Manifest
 Build : Aucun outil - code vanilla optimisé
-
+Galerie : Intersection Observer API + Touch Events
 
 📈 Progression Globale
-Total : 10/25 tâches complétées (40%)
-████████░░░░░░░░░░░░░░ 40%
-
-
+Total : 11/25 tâches complétées (44%)
+████████░░░░░░░░░░░░░░ 44%
 
 Métrique
 Valeur
 
-
-
 ⏱️ Temps écoulé
-4h30
-
+5h15
 
 ⏳ Temps restant
-6h30
-
+5h45
 
 📅 Total prévu
 11h
 
-
-
 🗺️ Plan de Développement
 ✅ ÉTAPE 1 - Page Accueil (100%) ✨
-
-
 
 Sous-étape
 Description
 Statut
-
-
+Temps
 
 1.1
 Image plaque d'immatriculation
 ✅
-
+15min
 
 1.2
 Repositionnement logo en haut à gauche
 ✅
-
+10min
 
 1.3
 Bouton CTA vers section Contact
 ✅
-
+10min
 
 Commande Git effectuée :
 git add index.html style.css images/
 git commit -m "feat: mise à jour page accueil - image plaque + repositionnement logo + CTA contact"
 git push origin main
 
-🔄 ÉTAPE 2 - Page Cabinet (87.5%)
-
-
+✅ ÉTAPE 2 - Page Cabinet (100%) ✨ COMPLÉTÉE
 
 Sous-étape
 Description
 Statut
 Complexité
-
-
+Temps
 
 2.1
 Titre "Accès" + adresse + PMR
 ✅
 ⭐
-
+20min
 
 2.2
 Horaires + services modifiés
 ✅
 ⭐
-
+25min
 
 2.3
 Google Maps iframe responsive
 ✅
 ⭐⭐
-
+30min
 
 2.4
 Galerie photos cabinet (3 photos)
-⏳ EN COURS
+✅
 ⭐⭐⭐
+45min
 
+🎯 Détails Sous-étape 2.4 - Galerie Photos Cabinet
+Objectifs atteints :
 
-🎯 FOCUS ACTUEL : Sous-étape 2.4 - Galerie Photos Cabinet
-⏰ Durée estimée : 45 minutes📍 Statut : PRÊT À DÉMARRER
-📋 Objectifs
+✅ Remplacement image placeholder SVG par galerie
+✅ Système de navigation carrousel complet
+✅ Lazy loading avec Intersection Observer
+✅ Optimisation responsive mobile/tablet/desktop
 
- Identifier les 3 photos à utiliser
- Remplacer l'image placeholder SVG par galerie
- Implémenter système de navigation/carousel
- Ajouter lazy loading avec Intersection Observer
- Optimiser responsive mobile/desktop
+Photos intégrées :
 
-🖼️ Photos Disponibles
-✅ images/photos/cabinet1_1_11zon.webp  (vue accueil)
-✅ images/photos/cabinet2_2_11zon.webp  (bureau)
-✅ images/photos/cabinet4_4_11zon.webp  (salle)
-🔧 Fonctionnalités Techniques
+✅ images/photos/cabinet1_1_11zon.webp (Vue accueil)
+✅ images/photos/cabinet2_2_11zon.webp (Bureau consultation)
+✅ images/photos/cabinet4_4_11zon.webp (Salle activités)
 
-Navigation : Boutons précédent/suivant + indicateurs
-Performance : Lazy loading des images
-UX : Transition fluide entre photos
-Responsive : Adaptation mobile/tablet/desktop
+Fonctionnalités techniques :
+
+✅ Navigation : Boutons ← → + Indicateurs + Clavier + Swipe
+✅ Performance : Lazy loading + Préchargement images
+✅ UX : Transitions fluides + Légendes dynamiques
+✅ Responsive : Adaptation automatique selon device
 
 Commandes Git effectuées :
+
 # Sous-étapes 2.1 et 2.2
+
 git add index.html
 git commit -m "feat(cabinet): mise à jour accès, horaires et spécialités"
 git push origin main
 
 # Sous-étape 2.3
+
 git add index.html style.css
 git commit -m "feat(cabinet): intégration Google Maps avec iframe responsive"
 git push origin main
-Commande Git à effectuer (2.4) :
+
+# Sous-étape 2.4 ✅ COMPLÉTÉE
+
 git add index.html style.css script.js
-git commit -m "feat(cabinet): ajout galerie photos avec lazy loading et navigation"
-git push origin main
+git commit -m "feat(cabinet): ajout galerie photos avec lazy loading et navigation
 
-⏳ ÉTAPE 3 - Page Profession (0%)
+- Création galerie 3 photos responsive
+- Navigation carrousel (boutons + indicateurs + swipe)
+- Lazy loading avec Intersection Observer
+- Support clavier et tactile
+- Optimisation mobile/tablet/desktop"
+  git push origin main
 
-
+🔴 ÉTAPE 3 - Page Profession (0%) ⏳ PROCHAINE
 
 Sous-étape
 Description
+Statut
 Complexité
-Durée
-
-
+Temps estimé
 
 3.1
-Carrousel d'images "action"
+Carrousel images action (2 photos)
+⏳
 ⭐⭐⭐
-45 min
-
+30min
 
 3.2
 Texte explicatif ergothérapie
-⭐
-15 min
+⏳
+⭐⭐
+30min
 
-
+Durée totale estimée : 1h
 Photos disponibles :
 
 images/photos/action-enfant.webp
 images/photos/action-senior.webp
 
-Durée totale estimée : 1h
+Objectifs :
+
+Créer carrousel similaire à galerie cabinet
+Intégrer texte explicatif profession
+Optimiser responsive
+Ajouter lazy loading
 
 ⏳ ÉTAPE 4 - Page Formation (0%)
 
-
-
 Sous-étape
 Description
+Statut
 Complexité
-Durée
-
-
+Temps estimé
 
 4.1
-Timeline chronologie inversée
+Timeline chronologique inversée
+⏳
 ⭐⭐⭐
-45 min
-
+45min
 
 4.2
-Ajout formations récentes
-⭐
-15 min
+Mise en forme responsive
+⏳
+⭐⭐
+25min
 
-
-Durée totale estimée : 1h
+Durée totale estimée : 1h10
 
 ⏳ ÉTAPE 5 - Page Tarifs (0%)
 
-
-
 Sous-étape
 Description
+Statut
 Complexité
-Durée
-
-
+Temps estimé
 
 5.1
-Refonte structure tarifs
+Restructuration grille tarifs
+⏳
 ⭐⭐
-20 min
-
+20min
 
 5.2
-Ajout descriptions détaillées
+Ajout icônes services
+⏳
 ⭐
-15 min
-
+15min
 
 5.3
-Section "Mutuelles"
-⭐
-10 min
-
+Mise en valeur tarifs
+⏳
+⭐⭐
+15min
 
 5.4
-Section "Modalités paiement"
+Section "Modes de paiement"
+⏳
 ⭐
-10 min
-
+10min
 
 5.5
-Design cartes tarifaires
-⭐⭐
-30 min
-
+Notes prescription obligatoire
+⏳
+⭐
+10min
 
 5.6
-Icons pour chaque service
-⭐
-15 min
-
+FAQ tarifs rapide
+⏳
+⭐⭐
+20min
 
 5.7
-Responsive mobile
-⭐⭐
-20 min
+Optimisation responsive
+⏳
+⭐
+10min
 
-
-Durée totale estimée : 2h
+Durée totale estimée : 1h40
 
 ⏳ ÉTAPE 6 - Page Contact (0%)
 
-
-
 Sous-étape
 Description
+Statut
 Complexité
-Durée
-
-
+Temps estimé
 
 6.1
 Refonte formulaire complet
+⏳
 ⭐⭐⭐
-1h
-
+45min
 
 6.2
-Validation temps réel EmailJS
-⭐⭐⭐
-45 min
-
+Intégration EmailJS avancée
+⏳
+⭐⭐
+30min
 
 6.3
-Messages succès/erreur
+Messages confirmation/erreur
+⏳
 ⭐⭐
-30 min
+25min
 
-
-Durée totale estimée : 2h15
+Durée totale estimée : 1h40
 
 📊 Tableau Récapitulatif
 
-
-
 Étape
 Statut
-Tâches
 Progression
-Durée
-
-
+Temps prévu
+Temps réel
 
 🏠 Accueil
 ✅ Terminée
-3/3
-100%
-✅
-
+3/3 (100%)
+35min
+35min
 
 🏢 Cabinet
-🔄 En cours
-7/8
-87.5%
-45 min
-
+✅ Terminée
+8/8 (100%)
+2h
+2h
 
 👩‍⚕️ Profession
 ⏳ En attente
-0/2
-0%
+0/2 (0%)
 1h
 
+-
 
 🎓 Formation
 ⏳ En attente
-0/2
-0%
-1h
+0/2 (0%)
+1h10
 
+-
 
 💰 Tarifs
 ⏳ En attente
-0/7
-0%
-2h
+0/7 (0%)
+1h40
 
+-
 
 📞 Contact
 ⏳ En attente
-0/3
-0%
-2h15
+0/3 (0%)
+1h40
 
+-
 
 TOTAL
-40%
-10/25
-40%
+44%
+11/25
 11h
+5h15
 
+🎯 Prochaine Action Immédiate
+🔴 ÉTAPE 3.1 - Carrousel Images Profession
+Complexité : ⭐⭐⭐Durée estimée : 30 minutesStatut : ⏳ PRÊT À DÉMARRER
+📋 Objectifs
 
+Créer carrousel 2 photos (enfant + senior)
+Implémenter navigation similaire galerie cabinet
+Ajouter lazy loading
+Optimiser responsive
 
-🎯 Prochaines Actions
-🔴 PRIORITÉ 1 - À FAIRE IMMÉDIATEMENT
-SOUS-ÉTAPE 2.4 - Galerie Photos Cabinet
+🖼️ Photos à Utiliser
 
-⏰ Durée : 45 minutes
-🎯 Objectif : Finaliser la page Cabinet à 100%
-📸 Photos : 3 images cabinet avec lazy loading
+✅ images/photos/action-enfant.webp (Action pédiatrie)
+✅ images/photos/action-senior.webp (Action gériatrie)
 
-🟡 PRIORITÉ 2 - APRÈS VALIDATION
-ÉTAPE 3 - Page Profession
+🔧 Fonctionnalités
 
-⏰ Durée : 1h
-🎯 Objectif : Carrousel images + contenu
+Navigation : Boutons + Indicateurs + Clavier + Swipe
+Performance : Lazy loading + Préchargement
+UX : Transitions fluides + Légendes
+Responsive : Mobile/Tablet/Desktop
 
-🟢 PRIORITÉ 3 - SUITE DU DÉVELOPPEMENT
+📝 Historique des Modifications
+Version 1.0.3 (Actuelle)
+Date : Octobre 2025Modifications :
 
-ÉTAPE 4 : Formation
-ÉTAPE 5 : Tarifs
-ÉTAPE 6 : Contact
+✅ Ajout classe GalleryManager dans script.js
+✅ Intégration galerie 3 photos section Cabinet
+✅ Support navigation multi-device
+✅ Lazy loading Intersection Observer
+✅ Optimisation responsive complète
 
+Version 1.0.2
+Date : Octobre 2025Modifications :
 
-📋 Assets Disponibles
-🖼️ Images Photos Cabinet (13 fichiers)
-✅ action-enfant.webp          → Page Profession
-✅ action-senior.webp          → Page Profession
-🎯 cabinet1_1_11zon.webp       → Galerie EN COURS
-🎯 cabinet2_2_11zon.webp       → Galerie EN COURS
-⏳ cabinet3_3_11zon.webp       → Backup galerie
-🎯 cabinet4_4_11zon.webp       → Galerie EN COURS
-⏳ couloir1_5_11zon.webp       → Utilisation future
-⏳ couloir2_6_11zon.webp       → Utilisation future
-⏳ entree_7_11zon.webp         → Utilisation future
-⏳ materiel1_8_11zon.webp      → Utilisation future
-⏳ materiel2_9_11zon.webp      → Utilisation future
-⏳ materiel3_10_11zon.webp     → Utilisation future
-✅ plaque-praticien_11_11zon.webp → Page Accueil
-⏳ Porte-cabinet-12_11zon.webp → Utilisation future
-🎨 Images Branding (7 fichiers)
-✅ Logo-ergo-decherf.png
-✅ Logo-ergo-decherf-removebg-preview.png
-✅ favicon.ico
-✅ android-chrome-192x192.png
-✅ android-chrome-512x512.png
-✅ apple-touch-icon.png
-✅ favicon-16x16.png
-✅ favicon-32x32.png
+✅ Intégration Google Maps section Cabinet
+✅ Mise à jour horaires et spécialités
 
-🎨 Design System
-🌈 Palette de Couleurs
---primary: #7BC142      /* Vert principal */
---accent-orange: #FF6B35
---accent-purple: #8A2BE2
---accent-blue: #4169E1
---accent-pink: #FF69B4
---text: #000000
---background: #ffffff
---light-gray: #f5f5f5
-📱 Breakpoints Responsive
-/* Mobile */
-@media (max-width: 480px)
+Version 1.0.1
+Date : Octobre 2025Modifications :
 
-/* Tablet */
-@media (min-width: 481px) and (max-width: 768px)
+✅ Ajout section Accès + PMR
+✅ Modification horaires cabinet
 
-/* Desktop */
-@media (min-width: 769px)
+Version 1.0.0
+Date : Octobre 2025Modifications :
 
-✅ Bonnes Pratiques
-📝 Documentation
-
-✅ Mettre à jour la feuille de route après chaque étape
-✅ Documenter selon le principe 6W (Who, What, When, Where, Why, hoW)
-✅ Garder une trace des commandes Git
-
-💻 Développement
-
-✅ Faire étape par étape avec validation
-✅ Toujours au plus simple - Vanilla JS
-✅ Pas de framework ou bibliothèque externe (sauf EmailJS)
-✅ Code propre et commenté
-✅ Performance et accessibilité prioritaires
-
-🔄 Git Workflow
-# Pattern de commits
-git add [fichiers modifiés]
-git commit -m "type(scope): description"
-git push origin main
-
-# Types: feat, fix, docs, style, refactor, perf, test
-
-📞 Informations Projet
-
-
-
-Information
-Détail
-
-
-
-👤 Client
-Cabinet Edwina Decherf
-
-
-💼 Développeur
-CND - Web Is Yours
-
-
-📅 Date de sortie
-Octobre 2025
-
-
-📌 Version
-1.0
-
-
-📄 Licence
-Propriétaire
-
-
-
-🔗 Liens Utiles
-
-📁 Fichiers projet : /index.html, /style.css, /script.js
-📋 Documentation : /README.md, /Contexte.md
-✅ Tâches : /todolist.md
-🎨 Assets : /images/, /images/photos/
-🔧 Config : /manifest.json
-
+✅ Page Accueil complétée
+✅ Logo + Plaque + CTA Contact
 
 <div align="center">
-  
-🚀 Développé avec ❤️ par CND - Web Is YoursVersion 1.0 • Octobre 2025
-Prochaine étape : SOUS-ÉTAPE 2.4 - Galerie Photos Cabinet⏰ Durée estimée : 45 minutes | 🎯 Objectif : Finaliser page Cabinet à 100%
+
+🎉 ÉTAPE 2 COMPLÉTÉE À 100%
+Page Cabinet finalisée avec succès
+✅ Accès et localisation✅ Horaires et spécialités✅ Google Maps intégré✅ Galerie photos interactive
+Progression globale : 44% (11/25 tâches)
+
+Attente de validation avant de passer à l'ÉTAPE 3
+
+Développé avec ❤️ par CND - Web Is YoursVersion 1.0.3 • Octobre 2025
+
 </div>
+
+✅ BONNES PRATIQUES
+✅ Mettre à jour la feuille de route à chaque étape✅ Donner les commandes git à chaque fin d'étape✅ Documentation claire et structurée✅ Principe du 6W + Comment (Who, What, When, Where, Why, hoW)✅ Faire étape par étape en attendant validation✅ Toujours faire au plus simple - Vanilla JS, pas de framework✅ Architecture modulaire avec classes ES6✅ Support multi-device avec progressive enhancement✅ Tests systématiques avant validation
