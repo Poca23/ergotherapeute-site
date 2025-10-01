@@ -201,8 +201,8 @@ class GalleryManager {
         this.images = [
             {
                 src: 'images/photos/entree_7_11zon.webp',
-                alt: 'Vue de l\'entrée du cabinet d\'ergothérapie',
-                caption: 'Vue de l\'entrée de la Maison Médicale'
+                alt: 'Entrée du cabinet d\'ergothérapie',
+                caption: 'Entrée de la Maison Médicale'
             },
             {
                 src: 'images/photos/cabinet2_2_11zon.webp',
