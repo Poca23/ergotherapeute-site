@@ -106,6 +106,34 @@
         <section id="profession" class="section">
             <div class="container">
                 <h2>L'ergothérapie, qu'est-ce que c'est ?</h2>
+
+                <!-- Carrousel images action pédiatrie/gériatrie -->
+                <div class="profession-gallery">
+                    <div id="professionGallery" class="gallery-container">
+                        <button class="gallery-nav gallery-prev" aria-label="Photo précédente">
+                            ‹
+                        </button>
+
+                        <img class="gallery-main-image lazy-load" data-src="images/photos/action-enfant.webp"
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23f0f4f8' width='800' height='450'/%3E%3C/svg%3E"
+                            alt="Ergothérapie pédiatrique - Accompagnement enfant" loading="lazy">
+
+                        <button class="gallery-nav gallery-next" aria-label="Photo suivante">
+                            ›
+                        </button>
+
+                        <div class="gallery-indicators">
+                            <button class="indicator active" data-index="0" aria-label="Photo 1"></button>
+                            <button class="indicator" data-index="1" aria-label="Photo 2"></button>
+                        </div>
+                    </div>
+
+                    <div class="gallery-caption">
+                        <span class="caption-text">Accompagnement en ergothérapie pédiatrique</span>
+                    </div>
+                </div>
+
+                <!-- Contenu texte existant -->
                 <div class="content-grid">
                     <div class="content-text">
                         <p>L'ergothérapie accompagne les personnes présentant des difficultés dans leurs activités
@@ -146,98 +174,86 @@
                             <li>Nécessité d'adapter l'environnement</li>
                         </ul>
                     </div>
-                    <div class="content-image">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmNGY4Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM0MTY5RTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5JbnRlcnZlbnRpb25zPC90ZXh0Pjwvc3ZnPg=="
-                            alt="Interventions ergothérapie" loading="lazy">
-                    </div>
                 </div>
             </div>
         </section>
 
-<!-- Cabinet -->
-<section id="cabinet" class="section">
-    <div class="container">
-        <h2>Le Cabinet</h2>
-        <div class="content-grid">
-            <div class="content-text">
-                <h3>Un espace adapté à tous</h3>
-                <p>Le cabinet est conçu pour accueillir enfants et adultes dans un environnement chaleureux et
-                    fonctionnel, avec du matériel spécialisé pour tous les âges.</p>
-                <br>
-                <div class="location-info">
-                    <h4>Accès</h4>
-                    <address>Maison De Santé Pluridisciplinaire <br>
-                        Avenue Jules Edouard Menard <br>
-                        86230 Saint Gervais Les Trois Clochers</address>
-                    <p><i>(Accessibilité P.M.R + parking gratuit)</i></p>
-                    <br>
-                    
-                    <!-- 🆕 GOOGLE MAPS INTÉGRÉ ICI -->
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2713.8!2d0.3447!3d46.8294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47fdcb0e1c7e4d5b%3A0x8c5e5d5e5d5e5d5e!2sAvenue%20Jules%20Edouard%20Menard%2C%2086230%20Saint-Gervais-les-Trois-Clochers!5e0!3m2!1sfr!2sfr!4v1696000000000!5m2!1sfr!2sfr"
-                            width="100%" 
-                            height="300"
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="Localisation Maison De Santé - Cabinet Edwina Decherf">
-                        </iframe>
+        <!-- Cabinet -->
+        <section id="cabinet" class="section">
+            <div class="container">
+                <h2>Le Cabinet</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <h3>Un espace adapté à tous</h3>
+                        <p>Le cabinet est conçu pour accueillir enfants et adultes dans un environnement chaleureux et
+                            fonctionnel, avec du matériel spécialisé pour tous les âges.</p>
+                        <br>
+                        <div class="location-info">
+                            <h4>Accès</h4>
+                            <address>Maison De Santé Pluridisciplinaire <br>
+                                Avenue Jules Edouard Menard <br>
+                                86230 Saint Gervais Les Trois Clochers</address>
+                            <p><i>(Accessibilité P.M.R + parking gratuit)</i></p>
+                            <br>
+
+                            <!-- 🆕 GOOGLE MAPS INTÉGRÉ ICI -->
+                            <div class="map-container">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2713.8!2d0.3447!3d46.8294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47fdcb0e1c7e4d5b%3A0x8c5e5d5e5d5e5d5e!2sAvenue%20Jules%20Edouard%20Menard%2C%2086230%20Saint-Gervais-les-Trois-Clochers!5e0!3m2!1sfr!2sfr!4v1696000000000!5m2!1sfr!2sfr"
+                                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="Localisation Maison De Santé - Cabinet Edwina Decherf">
+                                </iframe>
+                            </div>
+                            <br>
+
+                            <h4>Consultation</h4>
+                            <ul>
+                                <li>Consultation sur rendez-vous uniquement les mardi et mercredi</li>
+                                <li>Personnes âgées - Évaluation à domicile, aide technique</li>
+                                <li>Interventions en établissements</li>
+                            </ul>
+                            <h4>Spécialités du cabinet</h4>
+                            <ul>
+                                <li><strong>Pédiatrie</strong> : Troubles apprentissages, TSA, motricité fine</li>
+                                <li><strong>Gériatrie</strong> : Autonomie, prévention chutes</li>
+                                <li><strong>Tous handicaps</strong> : Adaptation personnalisée</li>
+                            </ul>
+                        </div>
                     </div>
-                    <br>
-                    
-                    <h4>Consultation</h4>
-                    <ul>
-                        <li>Consultation sur rendez-vous uniquement les mardi et mercredi</li>
-                        <li>Personnes âgées - Évaluation à domicile, aide technique</li>
-                        <li>Interventions en établissements</li>
-                    </ul>
-                    <h4>Spécialités du cabinet</h4>
-                    <ul>
-                        <li><strong>Pédiatrie</strong> : Troubles apprentissages, TSA, motricité fine</li>
-                        <li><strong>Gériatrie</strong> : Autonomie, prévention chutes</li>
-                        <li><strong>Tous handicaps</strong> : Adaptation personnalisée</li>
-                    </ul>
+                    <div class="content-image">
+                        <!-- 📸 Galerie Photos Cabinet -->
+                        <div class="cabinet-gallery" id="cabinetGallery">
+                            <div class="gallery-container">
+                                <!-- Image principale avec lazy loading -->
+                                <img class="gallery-main-image lazy-load" data-src="images/photos/cabinet1_1_11zon.webp"
+                                    alt="Vue d'accueil du cabinet d'ergothérapie" loading="lazy">
+
+                                <!-- Navigation carrousel -->
+                                <button class="gallery-nav gallery-prev" aria-label="Photo précédente">
+                                    <span>‹</span>
+                                </button>
+                                <button class="gallery-nav gallery-next" aria-label="Photo suivante">
+                                    <span>›</span>
+                                </button>
+
+                                <!-- Indicateurs de position -->
+                                <div class="gallery-indicators">
+                                    <button class="indicator active" data-index="0" aria-label="Photo 1"></button>
+                                    <button class="indicator" data-index="1" aria-label="Photo 2"></button>
+                                    <button class="indicator" data-index="2" aria-label="Photo 3"></button>
+                                </div>
+                            </div>
+
+                            <!-- Légendes des photos -->
+                            <p class="gallery-caption">
+                                <span class="caption-text">Salle du cabinet</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="content-image">
-<!-- 📸 Galerie Photos Cabinet -->
-<div class="cabinet-gallery" id="cabinetGallery">
-    <div class="gallery-container">
-        <!-- Image principale avec lazy loading -->
-        <img 
-            class="gallery-main-image lazy-load" 
-            data-src="images/photos/cabinet1_1_11zon.webp" 
-            alt="Vue d'accueil du cabinet d'ergothérapie"
-            loading="lazy"
-        >
-        
-        <!-- Navigation carrousel -->
-        <button class="gallery-nav gallery-prev" aria-label="Photo précédente">
-            <span>‹</span>
-        </button>
-        <button class="gallery-nav gallery-next" aria-label="Photo suivante">
-            <span>›</span>
-        </button>
-        
-        <!-- Indicateurs de position -->
-        <div class="gallery-indicators">
-            <button class="indicator active" data-index="0" aria-label="Photo 1"></button>
-            <button class="indicator" data-index="1" aria-label="Photo 2"></button>
-            <button class="indicator" data-index="2" aria-label="Photo 3"></button>
-        </div>
-    </div>
-    
-    <!-- Légendes des photos -->
-    <p class="gallery-caption">
-        <span class="caption-text">Salle du cabinet</span>
-    </p>
-</div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- Formations -->
         <section id="formations" class="section">
