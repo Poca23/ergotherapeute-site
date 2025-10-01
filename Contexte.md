@@ -1,5 +1,6 @@
 🏥 Contexte du Projet - Site Web d'Ergothérapeute
-Version 1.0.3 - Galerie Cabinet • Octobre 2025Développé par CND - Web Is Yours
+Version 1.0.4 - Galerie Cabinet + Profession • Octobre 2025
+Développé par CND - Web Is Yours
 
 📋 Vue d'ensemble du projet
 Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwina Decherf, spécialisé en pédiatrie et gériatrie. Il s'agit d'une Single Page Application (SPA) responsive avec des capacités Progressive Web App (PWA), construite entièrement en technologies web natives.
@@ -12,16 +13,13 @@ Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwi
 ✅ Formulaire de contact avec validation en temps réel et intégration EmailJS
 ✅ Optimisation SEO avec méta-tags dynamiques et schéma JSON-LD
 ✅ Optimisation des performances avec lazy loading et code splitting
-✅ Galerie photos interactive avec navigation carrousel (Nouveau)
+✅ Galerie photos interactive avec navigation carrousel 
 
 
 🛠️ Stack technique
 
-
-
 Technologie
 Implémentation
-
 
 
 Frontend
@@ -48,15 +46,14 @@ Galerie
 Intersection Observer API + Touch Events (Nouveau)
 
 
-
 📁 Structure du projet
-├── index.html              # Fichier HTML principal (✅ Galerie intégrée)
-├── style.css               # Styles avec propriétés CSS custom (✅ Styles galerie)
-├── script.js               # Logique JavaScript de l'application (✅ GalleryManager)
+├── index.html              # Fichier HTML principal
+├── style.css               # Styles avec propriétés CSS custom
+├── script.js               # Logique JavaScript de l'application
 ├── README.md               # Documentation
-├── Feuille de route.md     # 📍 Feuille de route mise à jour
+├── Feuille de route.md     # (mis à jour)
 ├── todolist.md             # Liste des tâches détaillées
-├── Contexte.md             # 📍 CE DOCUMENT (mis à jour)
+├── Contexte.md             # (mis à jour)
 ├── manifest.json           # Manifeste PWA
 └── images/                 # Assets visuels
     ├── Logo-ergo-decherf.png
@@ -67,10 +64,10 @@ Intersection Observer API + Touch Events (Nouveau)
     └── photos/             # Photos du cabinet
         ├── action-enfant.webp
         ├── action-senior.webp
-        ├── cabinet1_1_11zon.webp    ✅ Utilisée (Vue accueil)
-        ├── cabinet2_2_11zon.webp    ✅ Utilisée (Bureau)
+        ├── cabinet1_1_11zon.webp 
+        ├── cabinet2_2_11zon.webp
         ├── cabinet3_3_11zon.webp
-        ├── cabinet4_4_11zon.webp    ✅ Utilisée (Salle activités)
+        ├── cabinet4_4_11zon.webp
         ├── couloir1_5_11zon.webp
         ├── couloir2_6_11zon.webp
         ├── entree_7_11zon.webp
@@ -198,34 +195,22 @@ Adaptation automatique mobile/tablet/desktop
 Aspect ratio 16:9 préservé
 Boutons et indicateurs redimensionnés selon écran
 
-
-
-
 🌐 Support navigateur
-
-
 
 Navigateur
 Version
 
-
-
 Chrome
 60+
-
 
 Firefox
 55+
 
-
 Safari
 11+
 
-
 Edge
 79+
-
-
 
 📝 Notes de développement
 Construit avec les standards web modernes en se concentrant sur :
@@ -239,34 +224,6 @@ Architecture modulaire avec classes ES6 (Mise à jour)
 
 
 📅 Informations du projet
-
-
-
-
-
-
-
-
-Version
-1.0.3
-
-
-Date de sortie
-Octobre 2025
-
-
-Développeur
-CND - Web Is Yours
-
-
-Licence
-Logiciel propriétaire
-
-
-Dernière mise à jour
-Galerie photos cabinet - 2024
-
-
 
 📊 État d'Avancement Actuel
 ✅ TERMINÉ
@@ -282,18 +239,26 @@ Galerie photos cabinet - 2024
 ✅ Sous-Étape 2.2 : Horaires + services modifiés
 ✅ Sous-Étape 2.3 : Google Maps intégré avec iframe responsive
 ✅ Sous-Étape 2.4 : Galerie photos cabinet (3 photos avec lazy loading) (Nouveau)
+ÉTAPE 3 - Page Profession (100%) ✨ **COMPLÉTÉE v1.0.4**
+- ✅ **Sous-Étape 3.1 : Carrousel images action** (enfants + seniors) ✨ **NOUVEAU**
+- ✅ Galerie 2 photos interactives
+- ✅ Classe `GalleryManager` refactorisée (générique)
+- ✅ Navigation multi-support (boutons + indicateurs + clavier + swipe)
+- ✅ Lazy loading + préchargement
+- ✅ Responsive adaptatif
+- ✅ Légendes dynamiques
 
 ⏳ À FAIRE
 
-ÉTAPE 3 - Page Profession (carrousel images)
+ÉTAPE 3.2- Optimisation contenu texte Profession
 ÉTAPE 4 - Page Formation (chronologie inversée)
 ÉTAPE 5 - Page Tarifs (7 modifications)
 ÉTAPE 6 - Page Contact (refonte formulaire complète)
 
 
 📈 Progression Globale
-Total : 11/25 tâches complétées (44%)
-████████░░░░░░░░░░░░░░ 44%
+Total : 13/27 tâches complétées (48%)
+██████████░░░░░░░░░░░░ 48%
 
 
 
@@ -315,7 +280,7 @@ Progression
 
 👩‍⚕️ Profession
 ⏳ En attente
-0/2 (0%)
+1/2 (50%)
 
 
 🎓 Formation
@@ -332,56 +297,32 @@ Progression
 ⏳ En attente
 0/3 (0%)
 
-
-Temps écoulé : 5h15Temps restant estimé : 5h45Total prévu : 11h
+Temps écoulé : 5h45  
+Temps restant estimé : 5h15  
+Total prévu : 11h
 
 🎯 Prochaine Action Immédiate
-🔴 ÉTAPE 3 - Page Profession
-Complexité : ⭐⭐⭐Durée estimée : 1hStatut : ⏳ PRÊT À DÉMARRER
-Objectifs :
 
-Créer carrousel images action (enfants + seniors)
-Ajouter texte explicatif ergothérapie
-Optimiser responsive et transitions
-Intégrer lazy loading
+### 🔴 ÉTAPE 3.2 - Optimisation Texte Profession
 
+**Complexité** : ⭐  
+**Durée estimée** : 30min  
+**Statut** : ⏳ **PRÊT À DÉMARRER**
 
-📝 Commandes Git Effectuées
-# ÉTAPE 1 - Page Accueil
-git add index.html style.css images/
-git commit -m "feat: mise à jour page accueil - image plaque + repositionnement logo + CTA contact"
-git push origin main
+#### Objectifs :
+1. Révision structure texte explicatif
+2. Optimisation SEO contenu
+3. Ajout call-to-action vers Contact
+4. Vérification responsive texte + carrousel
 
-# ÉTAPE 2 - Sous-étapes 2.1 et 2.2
-git add index.html
-git commit -m "feat(cabinet): mise à jour accès, horaires et spécialités"
-git push origin main
-
-# ÉTAPE 2 - Sous-étape 2.3
-git add index.html style.css
-git commit -m "feat(cabinet): intégration Google Maps avec iframe responsive"
-git push origin main
-
-# ÉTAPE 2 - Sous-étape 2.4 (✅ EFFECTUÉE)
-git add index.html style.css script.js
-git commit -m "feat(cabinet): ajout galerie photos avec lazy loading et navigation
-
-- Création galerie 3 photos responsive
-- Navigation carrousel (boutons + indicateurs + swipe)
-- Lazy loading avec Intersection Observer
-- Support clavier et tactile
-- Optimisation mobile/tablet/desktop"
-git push origin main
-
-<div align="center">
-
-🎉 ÉTAPE 2 COMPLÉTÉE À 100%
-Page Cabinet finalisée avec succès
-✅ Accès et localisation✅ Horaires et spécialités✅ Google Maps intégré✅ Galerie photos interactive
-
-Développé avec ❤️ par CND - Web Is YoursVersion 1.0.3 • Octobre 2025
-</div>
-
+Version 1.0.4 • Octobre 2025
 
 ✅ BONNES PRATIQUES
-✅ Mettre à jour la feuille de route sur le même principe (Octobre 2025)✅ Donner les commandes git à chaque fin d'étape✅ Pratique professionnelle - Documentation claire et structurée✅ Faire sur le principe du 6W + Comment (Who, What, When, Where, Why, hoW)✅ Faire étape par étape en attendant validation✅ Toujours faire au plus simple - Vanilla JS, pas de framework✅ Architecture modulaire avec classes ES6 (Ajout)✅ Support multi-device avec progressive enhancement (Ajout)
+✅ Mettre à jour la feuille de route sur le même principe (Octobre 2025)
+✅ Donner les commandes git à chaque fin d'étape
+✅ Pratique professionnelle - Documentation claire et structurée
+✅ Faire sur le principe du 6W + Comment (Who, What, When, Where, Why, hoW)
+✅ Faire étape par étape en attendant validation
+✅ Toujours faire au plus simple - Vanilla JS, pas de framework
+✅ Architecture modulaire avec classes ES6 
+✅ Support multi-device avec progressive enhancement
