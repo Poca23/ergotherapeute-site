@@ -1,17 +1,20 @@
 🏥 Contexte du Projet - Site Web d'Ergothérapeute
-Version 1.0.6 - Section Formation Complétée • Octobre 2025
-Développé par CND - Web Is Yours
+Version 1.0.7 - Section Tarifs Complétée • Octobre 2025Développé par CND - Web Is Yours
+
 📋 Vue d'ensemble du projet
-Je développe une application web moderne pour le cabinet d'ergothérapie d'Edwina Decherf, spécialisé en pédiatrie et gériatrie. Il s'agit d'une Single Page Application (SPA) responsive avec des capacités Progressive Web App (PWA), construite entièrement en technologies web natives.
+Application web moderne pour le cabinet d'ergothérapie d'Edwina Decherf. Single Page Application (SPA) responsive avec capacités Progressive Web App (PWA), construite en technologies web natives.
 ✨ Fonctionnalités principales
-✅ Single Page Application (SPA) avec navigation fluide entre sections
-✅ Progressive Web App (PWA) - installable sur mobile et desktop
-✅ Design responsive avec approche mobile-first
-✅ Formulaire de contact avec validation en temps réel et intégration EmailJS
-✅ Optimisation SEO avec méta-tags dynamiques et schéma JSON-LD
-✅ Optimisation des performances avec lazy loading et code splitting
-✅ Galerie photos interactive avec navigation carrousel multi-support
-✅ Timeline de formation continue avec animations scroll reveal
+
+✅ SPA avec navigation fluide
+✅ PWA installable (mobile/desktop)
+✅ Design responsive mobile-first
+✅ Formulaire contact + EmailJS
+✅ SEO optimisé (meta-tags + JSON-LD)
+✅ Galeries photos interactives multi-support
+✅ Timeline formation avec scroll reveal
+✅ Section tarifs restructurée et clarifiée
+
+
 🛠️ Stack technique
 
 
@@ -26,78 +29,86 @@ HTML5, CSS3, JavaScript Vanilla (ES6+)
 
 
 Architecture
-SPA avec routage basé sur hash
+SPA avec routage hash-based
 
 
-Service Email
-EmailJS pour soumissions de formulaire de contact
+Email
+EmailJS (formulaire contact)
 
 
 PWA
-Service Worker + Web App Manifest
+Service Worker + Manifest
 
 
 Build
-Aucun outil de build - code vanilla optimisé
+Aucun - Code vanilla optimisé
 
 
 Galerie
-Intersection Observer API + Touch Events + Keyboard Events
+Intersection Observer + Touch/Keyboard Events
+
 
 
 📁 Structure du projet
-├── index.html              # Fichier HTML principal
-├── style.css               # Styles avec propriétés CSS custom
-├── script.js               # Logique JavaScript de l'application
+├── index.html              # HTML principal
+├── style.css               # Styles CSS custom properties
+├── script.js               # Logique JavaScript
 ├── README.md               # Documentation
-├── Feuille de route.md     # (mis à jour)
-├── todolist.md             # Liste des tâches détaillées
-├── Contexte.md             # (mis à jour)
+├── Feuille de route.md     # Suivi projet
+├── todolist.md             # Tâches détaillées
+├── Contexte.md             # Ce fichier
 ├── manifest.json           # Manifeste PWA
 └── images/                 # Assets visuels
-    ├── Logo-ergo-decherf.png
-    ├── Logo-ergo-decherf-removebg-preview.png
-    ├── favicon.ico
-    ├── android-chrome-*.png
-    ├── apple-touch-icon.png
-    └── photos/             # Photos du cabinet
-        ├── action-enfant.webp
-        ├── action-senior.webp
-        ├── cabinet1_1_11zon.webp 
-        ├── cabinet2_2_11zon.webp
-        ├── cabinet3_3_11zon.webp
-        ├── cabinet4_4_11zon.webp
-        ├── couloir1_5_11zon.webp
-        ├── couloir2_6_11zon.webp
-        ├── entree_7_11zon.webp
-        ├── materiel1_8_11zon.webp
-        ├── materiel2_9_11zon.webp
-        ├── materiel3_10_11zon.webp
-        ├── plaque-praticien_11_11zon.webp
-        └── Porte-cabinet-12_11zon.webp
+    ├── logos/              # Logos et favicons
+    └── photos/             # Photos cabinet (13 images .webp)
 Points clés architecture :
 
-✅ Classe générique réutilisable (Cabinet + Profession)
+✅ Classes ES6 génériques réutilisables
 ✅ Support multi-instances indépendantes
-✅ Détection visibilité pour éviter conflits clavier
 ✅ Événements découplés (addEventListener)
 ✅ Code maintenable (principe DRY)
 
+
 🧩 Composants clés
-🧭 Système de navigation
-
-Header fixe avec filtre backdrop
-Menu hamburger responsive pour mobile
-Défilement fluide entre sections
-
 📄 Sections de contenu
 
-Home - Présentation professionnelle et expertise ✅
-Profession - Explication de l'ergothérapie ✅ 
-Cabinet - Localisation, horaires, spécialités ✅ 
-Formation - Timeline de formation continue ✅
-Tarifs - Tarifs des services et conditions de paiement ⏳
-Contact - Formulaire de contact et informations ⏳
+
+
+Section
+Description
+Statut
+
+
+
+Home
+Présentation professionnelle
+✅
+
+
+Profession
+Explication ergothérapie + carrousel
+✅
+
+
+Cabinet
+Localisation, horaires, galerie
+✅
+
+
+Formation
+Timeline formation continue
+✅
+
+
+Tarifs
+Grille tarifs + modalités
+✅
+
+
+Contact
+Formulaire et informations
+⏳
+
 
 ⚡ Classes JavaScript
 
@@ -110,100 +121,69 @@ Statut
 
 
 Navigation
-Routage SPA et gestion des sections
+Routage SPA et sections
 ✅
 
 
 MobileMenu
-Toggle de navigation mobile
+Menu hamburger responsive
 ✅
 
 
 ContactForm
-Validation, soumission formulaire + EmailJS
+Validation + EmailJS
 ✅
 
 
 Performance
-Lazy loading et optimisation
+Lazy loading
 ✅
 
 
 SEO
-Méta-tags dynamiques et données structurées
+Meta-tags dynamiques
 ✅
 
 
 GalleryManager
-Carrousel photos avec navigation multi-support
+Carrousel photos multi-support
 ✅
+
 
 
 🎨 Système de design
 🌈 Palette de couleurs
 
 Primaire : #7BC142 (Vert)
-Couleurs d'accent : Orange #FF6B35, Violet #8A2BE2, Bleu #4169E1, Rose #FF69B4
+Accents : Orange #FF6B35, Violet #8A2BE2, Bleu #4169E1, Rose #FF69B4
 Texte : Noir sur fonds blancs/gris clair
 
-📱 Points de rupture responsive
+📱 Breakpoints responsive
 
 Mobile : < 480px
 Tablette : 480px - 768px
 Desktop : > 768px
 
 
-🚀 Implémentation des fonctionnalités
-📱 Capacités PWA
-
-Prêt pour le mode hors ligne avec service worker
-Expérience d'application installable
-Performance native
-
-📧 Intégration Email
-
-Service EmailJS pour livraison d'emails fiable
-Traitement de formulaire côté client sans backend
-Validation de formulaire en temps réel et retour de soumission
-
-🔍 SEO et Accessibilité
-
-Structure HTML5 sémantique
-Titres et descriptions de page dynamiques
-Données structurées Schema.org
-Labels ARIA pour lecteurs d'écran
-
-⚡ Optimisations de performance
-
-Lazy loading pour les images
-Gestionnaires de redimensionnement debounced
-Empreinte CSS et JavaScript minimale
-Aucune dépendance externe (sauf EmailJS)
-
+🚀 Fonctionnalités clés
 📸 Galerie Photos Interactive
 Navigation multi-support :
 
 🖱️ Boutons précédent/suivant
-🔘 Indicateurs de position cliquables
-⌨️ Support clavier (flèches ← →)
+🔘 Indicateurs cliquables
+⌨️ Clavier (flèches ← →)
 👆 Swipe tactile mobile
 
 Performance :
 
 Lazy loading Intersection Observer
-Préchargement des images suivantes
-Transitions fluides CSS
+Préchargement images suivantes
+Transitions CSS fluides
 
-Responsive :
-
-Adaptation automatique mobile/tablet/desktop
-Aspect ratio 16:9 préservé
-Boutons et indicateurs redimensionnés selon écran
-
-📜 Timeline de Formation (Nouveau)
+📜 Timeline Formation
 Structure :
 
-Timeline verticale chronologique inversée (plus récent en haut)
+Timeline verticale chronologique inversée
 Année + Titre + Organisme
 Alternance gauche/droite (desktop)
 Empilage vertical (mobile)
@@ -212,13 +192,131 @@ Animations :
 
 Scroll reveal avec Intersection Observer
 Fade-in + slide progressif
-Indicateurs visuels (points colorés)
+Indicateurs colorés
 
-Responsive :
+💰 Section Tarifs (v1.0.7)
+Structure :
 
-Layout adaptatif desktop/mobile
-Points centraux alignés
-Espacement optimisé
+Pricing cards responsive (grille 4→2→1)
+Section "Important" mise en évidence
+Modalités 3 colonnes (Paiement | Déplacements | Aides)
+Liens utiles (CPAM, MDPH, AEEH)
+
+Contenu :
+
+Bilan complet : 155€
+Séances cabinet : 42€ (45min)
+Séances domicile/école : 47€ (45min)
+Évaluation aides techniques : 155€
+Services complémentaires détaillés
+
+Design :
+
+Cards avec ombres et hover effects
+Hiérarchie typographique claire
+Icônes pour visualisation rapide
+Responsive mobile-first
+
+
+📊 État d'Avancement Actuel
+✅ TERMINÉ
+ÉTAPE 1 - Page Accueil (100%)
+
+✅ Image plaque immatriculation
+✅ Logo repositionné
+✅ Bouton CTA vers Contact
+
+ÉTAPE 2 - Page Cabinet (100%)
+
+✅ Titre "Accès" + adresse + PMR
+✅ Horaires + services modifiés
+✅ Google Maps intégré
+✅ Galerie photos cabinet
+
+ÉTAPE 3 - Page Profession (100%)
+
+✅ Carrousel images action
+✅ Texte explicatif conservé
+
+ÉTAPE 4 - Page Formation (100%)
+
+✅ Timeline chronologique
+✅ Animations scroll reveal
+
+ÉTAPE 5 - Page Tarifs (100%) ✨ v1.0.7
+
+✅ Structure HTML restructurée
+✅ Grille pricing cards modernisée
+✅ Section "Important" mise en évidence
+✅ Modalités de paiement actualisées
+✅ Liens utiles organisés
+✅ Design responsive optimisé
+✅ Hiérarchie visuelle améliorée
+
+⏳ À FAIRE
+ÉTAPE 6 - Page Contact (0%)
+
+⏳ Refonte formulaire HTML
+⏳ Validation JS renforcée
+⏳ Design et UX optimisés
+
+
+📈 Progression Globale
+Total : 23/27 tâches complétées (85%)
+█████████████████░░░░░ 85%
+
+
+
+Étape
+Statut
+Progression
+
+
+
+🏠 Accueil
+✅
+3/3 (100%)
+
+
+🏢 Cabinet
+✅
+8/8 (100%)
+
+
+👩‍⚕️ Profession
+✅
+2/2 (100%)
+
+
+🎓 Formation
+✅
+2/2 (100%)
+
+
+💰 Tarifs
+✅
+7/7 (100%)
+
+
+📞 Contact
+⏳
+0/3 (0%)
+
+
+⏱️ Temps écoulé : 9h15⏱️ Temps restant : 1h45⏱️ Total prévu : 11h
+
+🎯 Prochaine Action Immédiate
+🔴 ÉTAPE 6 - Page Contact
+Complexité : ⭐⭐⭐⭐ (Haute)
+Durée estimée : 1h45
+Statut : ⏳ PRÊT À DÉMARRER
+Objectifs :
+
+Refonte complète formulaire contact
+Validation en temps réel améliorée
+Messages d'erreur clairs
+Design moderne et accessible
+Intégration EmailJS optimisée
 
 
 🌐 Support navigateur
@@ -247,127 +345,19 @@ Edge
 
 
 
-📝 Notes de développement
-Construit avec les standards web modernes en se concentrant sur :
-
-JavaScript vanilla propre et maintenable
-Amélioration progressive
-Design responsive mobile-first
-Conformité à l'accessibilité
-Optimisation des performances
-Architecture modulaire avec classes ES6 (Mise à jour)
-
-
-📅 Informations du projet
-📊 État d'Avancement Actuel
-✅ TERMINÉ
-ÉTAPE 1 - Page Accueil (100%)
-
-✅ Image plaque d'immatriculation intégrée
-✅ Logo repositionné en haut à gauche
-✅ Bouton CTA vers section Contact
-
-ÉTAPE 2 - Page Cabinet (100%) ✨ COMPLÉTÉE
-
-✅ Sous-Étape 2.1 : Titre "Accès" + adresse + accessibilité PMR
-✅ Sous-Étape 2.2 : Horaires + services modifiés
-✅ Sous-Étape 2.3 : Google Maps intégré avec iframe responsive
-✅ Sous-Étape 2.4 : Galerie photos cabinet (3 photos avec lazy loading)
-
-ÉTAPE 3 - Page Profession (100%) ✨ COMPLÉTÉE
-
-✅ Sous-Étape 3.1 : Carrousel images action (enfants + seniors)
-✅ Galerie 2 photos interactives
-✅ Classe GalleryManager refactorisée (générique)
-✅ Navigation multi-support (boutons + indicateurs + clavier + swipe)
-✅ Lazy loading + préchargement
-✅ Responsive adaptatif
-✅ Légendes dynamiques
-✅ Sous-Étape 3.2 : Texte explicatif (conservé tel quel - décision client)
-
-ÉTAPE 4 - Page Formation (100%) ✨ COMPLÉTÉE v1.0.6
-
-✅ Sous-Étape 4.1 : Timeline chronologique inversée (2025 → 2015)
-✅ Structure HTML sémantique avec années + titres + organismes
-✅ Mise en page alternée gauche/droite (desktop)
-✅ Layout empilé responsive (mobile)
-✅ Animations scroll reveal avec Intersection Observer
-✅ Indicateurs visuels (points colorés)
-✅ Transitions fluides fade-in + slide
-
-⏳ À FAIRE
-
-ÉTAPE 5 - Page Tarifs (7 modifications)
-ÉTAPE 6 - Page Contact (refonte formulaire complète)
-
-
-📈 Progression Globale
-Total : 16/27 tâches complétées (59%)
-████████████░░░░░░░░░░ 59%
-
-
-
-Étape
-Statut
-Progression
-
-
-
-🏠 Accueil
-✅ Terminée
-3/3 (100%)
-
-
-🏢 Cabinet
-✅ Terminée
-8/8 (100%)
-
-
-👩‍⚕️ Profession
-✅ Terminée
-2/2 (100%)
-
-
-🎓 Formation
-✅ Terminée
-2/2 (100%)
-
-
-💰 Tarifs
-⏳ En attente
-0/7 (0%)
-
-
-📞 Contact
-⏳ En attente
-0/3 (0%)
-
-
-Temps écoulé : 7h15Temps restant estimé : 3h45Total prévu : 11h
-
-🎯 Prochaine Action Immédiate
-🔴 ÉTAPE 5 - Page Tarifs (Refonte complète)
-Complexité : ⭐⭐⭐ (Élevée)Durée estimée : 2h00Statut : ⏳ PRÊT À DÉMARRER
-Objectifs :
-
-Refonte structure tarifaire (7 modifications demandées)
-Mise en page claire et lisible
-Conditions de paiement actualisées
-Design responsive adaptatif
-Mise en valeur informations importantes
-
-
-Version 1.0.6 • Octobre 2025
-
 ✅ BONNES PRATIQUES APPLIQUÉES
 
-✅ Mettre à jour Contexte.md + Feuille de route.md à chaque étape
-✅ Donner les commandes git à chaque fin d'étape
-✅ Pratique professionnelle - Documentation claire et structurée
-✅ Faire sur le principe du 6W + Comment (Who, What, When, Where, Why, hoW)
-✅ Faire étape par étape en attendant validation
-✅ Toujours faire au plus simple - Vanilla JS, pas de framework
-✅ Architecture modulaire avec classes ES6
-✅ Support multi-device avec progressive enhancement
-✅ Code review avant chaque commit
-✅ Tests manuels multi-navigateurs systématiques
+✅ Documentation mise à jour à chaque étape
+✅ Commandes git systématiques
+✅ Approche étape par étape avec validation
+✅ Vanilla JS sans framework
+✅ Architecture modulaire ES6
+✅ Progressive enhancement
+✅ Code review avant commit
+✅ Tests multi-navigateurs
+
+
+<div align="center">
+
+Version 1.0.7 • Octobre 2025📊 Progression : 85% | ⏱️ Temps restant : 1h45Développé avec ❤️ par CND - Web Is Yours
+</div>
