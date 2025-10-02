@@ -440,6 +440,37 @@ body {
   margin-top: 3rem;
 }
 
+#tarifs > div > div.pricing-info > div.container > div.profile-content {
+  max-width: fit-content;
+}
+
+.links-help {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.links-help:hover {
+  text-decoration: underline;
+}
+
+.links-help::after {
+  font-size: 1rem;
+}
+
+#tarifs
+  > div
+  > div.pricing-info
+  > div.container
+  > div
+  > div
+  > ul
+  > li:nth-child(1)
+  > ul
+  > li {
+  margin-left: 1rem;
+}
+
 .info-section {
   background: var(--bg-light);
   padding: 1.5rem;
