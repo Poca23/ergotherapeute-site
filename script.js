@@ -85,147 +85,177 @@ class MobileMenu {
 }
 
 class ContactForm {
-  constructor() {
-    this.form = $("#contactForm");
-    this.loadEmailJS();
+  constructor(formId) {
+    this.form = document.getElementById(formId);
+
+    if (!this.form) return;
+
+    this.fields = {
+      parentNom: this.form.querySelector("#parent-nom"),
+      parentPrenom: this.form.querySelector("#parent-prenom"),
+      email: this.form.querySelector("#email"),
+      telephone: this.form.querySelector("#telephone"),
+      enfantNom: this.form.querySelector("#enfant-nom"),
+      enfantPrenom: this.form.querySelector("#enfant-prenom"),
+      dateNaissance: this.form.querySelector("#date-naissance"),
+      classe: this.form.querySelector("#classe"),
+      ecole: this.form.querySelector("#ecole"),
+      message: this.form.querySelector("#message"),
+      rgpd: this.form.querySelector("#rgpd"),
+    };
+
     this.init();
   }
 
-  async loadEmailJS() {
-    if (typeof emailjs === "undefined") {
-      try {
-        await this.loadScript(
-          "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-        );
-        emailjs.init(config.emailjs.publicKey);
-      } catch (error) {
-        console.warn("EmailJS non disponible, utilisation du fallback mailto");
-      }
-    }
-  }
-
-  loadScript(src) {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-
   init() {
-    this.form?.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      await this.handleSubmit();
+    // Définir date max (aujourd'hui) pour date de naissance
+    const today = new Date().toISOString().split("T")[0];
+    if (this.fields.dateNaissance) {
+      this.fields.dateNaissance.setAttribute("max", today);
+    }
+
+    // Validation en temps réel
+    Object.values(this.fields).forEach((field) => {
+      if (!field) return;
+
+      field.addEventListener("blur", () => this.validateField(field));
+      field.addEventListener("input", () => {
+        if (field.getAttribute("aria-invalid") === "true") {
+          this.validateField(field);
+        }
+      });
     });
-    this.form
-      ?.querySelectorAll("input, select, textarea")
-      .forEach((field) =>
-        field.addEventListener("blur", () => this.validateField(field))
-      );
+
+    // Soumission formulaire
+    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
   }
 
-  async handleSubmit() {
-    const formData = new FormData(this.form),
-      data = Object.fromEntries(formData.entries());
-    if (!this.validateForm(data)) return;
+  validateField(field) {
+    const value = field.value.trim();
+    const fieldName = field.name;
+    const errorElement = document.getElementById(`${field.id}-error`);
+    let isValid = true;
+    let errorMessage = "";
+
+    // Validation champs requis
+    if (field.required && !value) {
+      isValid = false;
+      errorMessage = "Ce champ est obligatoire";
+    }
+
+    // Validations spécifiques
+    else if (fieldName === "email" && value) {
+      if (!this.isValidEmail(value)) {
+        isValid = false;
+        errorMessage = "Email invalide (ex: nom@exemple.fr)";
+      }
+    } else if (fieldName === "telephone" && value) {
+      if (!this.isValidPhone(value)) {
+        isValid = false;
+        errorMessage = "Téléphone invalide (10 chiffres requis)";
+      }
+    } else if (fieldName === "date_naissance" && value) {
+      const birthDate = new Date(value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+
+      if (birthDate > today) {
+        isValid = false;
+        errorMessage = "La date ne peut pas être dans le futur";
+      } else if (age > 18) {
+        isValid = false;
+        errorMessage = "Pour les adultes, contactez-moi directement";
+      }
+    } else if (field.type === "checkbox" && field.required && !field.checked) {
+      isValid = false;
+      errorMessage = "Vous devez accepter pour continuer";
+    }
+
+    // Mise à jour UI
+    if (errorElement) {
+      errorElement.textContent = errorMessage;
+    }
+    field.setAttribute("aria-invalid", !isValid);
+
+    return isValid;
+  }
+
+  validateForm() {
+    let isValid = true;
+
+    Object.values(this.fields).forEach((field) => {
+      if (field && field.required) {
+        if (!this.validateField(field)) {
+          isValid = false;
+        }
+      }
+    });
+
+    return isValid;
+  }
+
+  async handleSubmit(e) {
+    e.preventDefault();
+
+    // Validation complète
+    if (!this.validateForm()) {
+      this.showError("Veuillez corriger les erreurs dans le formulaire");
+      // Focus sur premier champ invalide
+      const firstInvalid = this.form.querySelector('[aria-invalid="true"]');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
 
     this.showLoader();
 
-    try {
-      if (typeof emailjs !== "undefined") {
-        await emailjs.send(
-          config.emailjs.serviceId,
-          config.emailjs.templateId,
-          data
-        );
-        this.showSuccess();
-      } else {
-        this.fallbackToMailto(data);
-      }
+    // Préparation données
+    const formData = {
+      parent_nom: this.fields.parentNom.value.trim(),
+      parent_prenom: this.fields.parentPrenom.value.trim(),
+      email: this.fields.email.value.trim(),
+      telephone: this.fields.telephone.value.trim(),
+      enfant_nom: this.fields.enfantNom.value.trim(),
+      enfant_prenom: this.fields.enfantPrenom.value.trim(),
+      date_naissance: this.fields.dateNaissance.value,
+      classe: this.fields.classe.value.trim() || "Non renseignée",
+      ecole: this.fields.ecole.value.trim() || "Non renseignée",
+      message: this.fields.message.value.trim(),
+      date_demande: new Date().toLocaleDateString("fr-FR"),
+    };
 
-      this.form.reset();
-      $$("input, select, textarea").forEach(
-        (field) => (field.style.borderColor = "")
+    try {
+      // Envoi EmailJS
+      const response = await emailjs.send(
+        config.emailjs.serviceId,
+        config.emailjs.templateId,
+        formData
       );
+
+      if (response.status === 200) {
+        this.showSuccess();
+        this.form.reset();
+        // Reset aria-invalid
+        Object.values(this.fields).forEach((field) => {
+          if (field) field.setAttribute("aria-invalid", "false");
+        });
+      }
     } catch (error) {
       console.error("Erreur EmailJS:", error);
-      this.fallbackToMailto(data);
+      this.showError(
+        "Impossible d'envoyer votre message. Veuillez réessayer ou me contacter par téléphone."
+      );
     } finally {
       this.hideLoader();
     }
   }
 
-  fallbackToMailto(data) {
-    const emailBody = this.generateEmailBody(data);
-    const subject = `Demande de rendez-vous - ${data.motif}`;
-    const mailtoUrl = `${config.emailService}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(emailBody)}`;
-
-    try {
-      window.location.href = mailtoUrl;
-      setTimeout(() => this.showSuccess(), 500);
-    } catch {
-      this.showError("Erreur lors de l'ouverture du client mail");
-    }
-  }
-
-  generateEmailBody(data) {
-    return `Nouvelle demande de rendez-vous
-
-Informations du patient :
-- Nom: ${data.nom}
-- Email: ${data.email}
-- Téléphone: ${data.telephone || "Non renseigné"}
-- Tranche d'âge: ${data.age || "Non précisé"}
-
-Demande :
-- Motif: ${data.motif}
-- Urgence: ${data.urgence || "Normal"}
-
-Message :
-${data.message || "Aucun message complémentaire"}
-
----
-Formulaire envoyé via le site web`;
-  }
-
-  validateForm(data) {
-    const errors = [];
-    if (!data.nom?.trim()) errors.push("Le nom est requis");
-    if (!data.email?.trim()) errors.push("L'email est requis");
-    if (!data.motif) errors.push("Le motif est requis");
-    if (data.email && !this.isValidEmail(data.email))
-      errors.push("L'email n'est pas valide");
-    if (errors.length > 0) {
-      this.showError(errors.join("\n"));
-      return false;
-    }
-    return true;
-  }
-
-  validateField(field) {
-    field.style.borderColor = "";
-    if (field.required && !field.value.trim()) {
-      field.style.borderColor = "var(--error)";
-      return false;
-    }
-    if (
-      field.type === "email" &&
-      field.value &&
-      !this.isValidEmail(field.value)
-    ) {
-      field.style.borderColor = "var(--error)";
-      return false;
-    }
-    field.style.borderColor = "var(--success)";
-    return true;
-  }
-
   isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  isValidPhone(phone) {
+    const cleaned = phone.replace(/[\s\.\-\(\)]/g, "");
+    return /^0[1-9]\d{8}$/.test(cleaned);
   }
 
   showLoader() {
@@ -246,24 +276,37 @@ Formulaire envoyé via le site web`;
 
   showSuccess() {
     this.showMessage(
-      "✅ Votre demande a été transmise avec succès ! Je vous recontacterai rapidement pour convenir d'un rendez-vous.",
+      "✅ Votre demande a été transmise avec succès ! Je vous recontacterai sous 48h pour convenir d'un rendez-vous.",
       "success"
     );
+
+    // Scroll vers message
+    setTimeout(() => {
+      const message = this.form.querySelector(".form-message");
+      if (message) {
+        message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }, 100);
   }
 
-  showError(message) {
-    this.showMessage("❌ Erreur: " + message, "error");
+  showError(text) {
+    this.showMessage("❌ " + text, "error");
   }
 
   showMessage(text, type) {
-    const existing = $(".form-message");
+    // Supprimer message existant
+    const existing = this.form.querySelector(".form-message");
     if (existing) existing.remove();
 
+    // Créer nouveau message
     const message = document.createElement("div");
     message.className = `form-message ${type}`;
     message.innerHTML = text;
+    message.setAttribute("role", type === "error" ? "alert" : "status");
+
     this.form.appendChild(message);
 
+    // Auto-suppression après 8s
     setTimeout(() => message.remove(), 8000);
   }
 }
@@ -532,7 +575,7 @@ class App {
   constructor() {
     this.navigation = new Navigation();
     this.mobileMenu = new MobileMenu();
-    this.contactForm = new ContactForm();
+    this.contactForm = new ContactForm("contact-form");
     this.seo = new SEO();
     this.init();
   }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +41,17 @@
         }
     </style>
     <link rel="stylesheet" href="style.css">
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init({
+                publicKey: "atEnZgePdH88zB9jU",
+            });
+        })();
+    </script>
+
 </head>
 
 <body class="loading">
@@ -448,80 +461,241 @@
         <!-- Contact -->
         <section id="contact" class="section">
             <div class="container">
-                <h2>Contact & Prise de rendez-vous</h2>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <h3>Email</h3>
-                        <a href="mailto:edwinadecherf@gmail.com">edwinadecherf@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <h3>Téléphone</h3>
-                        <a href="tel:+33632629511">06 32 62 95 11</a>
-                    </div>
-                    <div class="contact-item important">
-                        <h3>⚕️ Important</h3>
-                        <p>- Prescription médicale obligatoire pour toute intervention</p>
-                        <p>- Toute séance annulée moins de 24h à l'avance sera facturée, sauf justification (maladie
-                            avec
-                            certificat médical).</p>
-                    </div>
+                <div class="section-header">
+                    <h2>📞 Me contacter</h2>
+                    <p class="subtitle">Prenons rendez-vous pour évaluer les besoins de votre enfant</p>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <input type="hidden" name="form-name" value="contact">
-                    <div class="form-group">
-                        <label for="nom">Nom *</label>
-                        <input type="text" id="nom" name="nom" required>
+
+                <div class="contact-grid">
+                    <!-- COLONNE GAUCHE : Formulaire -->
+                    <div class="contact-form-wrapper">
+                        <form id="contact-form" class="contact-form" novalidate>
+
+                            <!-- PARTIE 1 : Informations Parents -->
+                            <fieldset class="form-section">
+                                <legend>👨‍👩‍👧 Vos informations</legend>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="parent-nom">
+                                            Nom <span class="required">*</span>
+                                        </label>
+                                        <input type="text" id="parent-nom" name="parent_nom" required
+                                            autocomplete="family-name" aria-required="true"
+                                            aria-describedby="parent-nom-error">
+                                        <span class="error-message" id="parent-nom-error"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="parent-prenom">
+                                            Prénom <span class="required">*</span>
+                                        </label>
+                                        <input type="text" id="parent-prenom" name="parent_prenom" required
+                                            autocomplete="given-name" aria-required="true"
+                                            aria-describedby="parent-prenom-error">
+                                        <span class="error-message" id="parent-prenom-error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">
+                                        Email <span class="required">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required autocomplete="email"
+                                        aria-required="true" aria-describedby="email-error"
+                                        placeholder="exemple@email.com">
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telephone">
+                                        Téléphone <span class="required">*</span>
+                                    </label>
+                                    <input type="tel" id="telephone" name="telephone" required autocomplete="tel"
+                                        aria-required="true" aria-describedby="telephone-error"
+                                        placeholder="06 12 34 56 78" pattern="[0-9\s\.\-\(\)]+">
+                                    <span class="error-message" id="telephone-error"></span>
+                                </div>
+                            </fieldset>
+
+                            <!-- PARTIE 2 : Informations Enfant -->
+                            <fieldset class="form-section">
+                                <legend>Informations sur l'enfant</legend>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="enfant-nom">
+                                            Nom <span class="required">*</span>
+                                        </label>
+                                        <input type="text" id="enfant-nom" name="enfant_nom" required
+                                            aria-required="true" aria-describedby="enfant-nom-error">
+                                        <span class="error-message" id="enfant-nom-error"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="enfant-prenom">
+                                            Prénom <span class="required">*</span>
+                                        </label>
+                                        <input type="text" id="enfant-prenom" name="enfant_prenom" required
+                                            aria-required="true" aria-describedby="enfant-prenom-error">
+                                        <span class="error-message" id="enfant-prenom-error"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="date-naissance">
+                                            Date de naissance <span class="required">*</span>
+                                        </label>
+                                        <input type="date" id="date-naissance" name="date_naissance" required
+                                            aria-required="true" aria-describedby="date-naissance-error" max="">
+                                        <span class="error-message" id="date-naissance-error"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="classe">
+                                            Classe actuelle
+                                        </label>
+                                        <input type="text" id="classe" name="classe" placeholder="Ex: CP, CE1..."
+                                            aria-describedby="classe-hint">
+                                        <small id="classe-hint" class="form-hint">Optionnel</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ecole">
+                                        École
+                                    </label>
+                                    <input type="text" id="ecole" name="ecole" placeholder="Nom de l'établissement"
+                                        aria-describedby="ecole-hint">
+                                    <small id="ecole-hint" class="form-hint">Optionnel</small>
+                                </div>
+                            </fieldset>
+
+                            <!-- PARTIE 3 : Demande -->
+                            <fieldset class="form-section">
+                                <legend>Votre demande</legend>
+
+                                <div class="form-group">
+                                    <label for="message">
+                                        Message <span class="required">*</span>
+                                    </label>
+                                    <textarea id="message" name="message" rows="6" required aria-required="true"
+                                        aria-describedby="message-error message-examples"
+                                        placeholder="Décrivez votre demande..."></textarea>
+                                    <span class="error-message" id="message-error"></span>
+
+                                    <details class="message-examples" id="message-examples">
+                                        <summary>Exemples de demandes</summary>
+                                        <ul>
+                                            <li><strong>Bilan initial :</strong> "Je souhaiterais un premier bilan pour
+                                                mon enfant qui présente des difficultés en écriture."</li>
+                                            <li><strong>Troubles apprentissages :</strong> "Mon enfant a des difficultés
+                                                de concentration et d'organisation."</li>
+                                            <li><strong>Motricité fine :</strong> "Difficultés avec le découpage et la
+                                                tenue du crayon."</li>
+                                            <li><strong>Évaluation domicile :</strong> "Besoin d'une évaluation à
+                                                domicile pour adapter l'environnement."</li>
+                                        </ul>
+                                    </details>
+                                </div>
+
+                                <div class="form-group checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="rgpd" name="rgpd" required aria-required="true"
+                                            aria-describedby="rgpd-error">
+                                        <span>
+                                            J'accepte que mes données soient traitées pour répondre à ma demande
+                                            <span class="required">*</span>
+                                        </span>
+                                    </label>
+                                    <span class="error-message" id="rgpd-error"></span>
+                                    <small class="form-hint">
+                                        Vos données sont uniquement utilisées pour vous recontacter et ne sont jamais
+                                        partagées.
+                                    </small>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <span></span> Envoyer ma demande
+                                </button>
+                                <p class="form-info">(Réponse sous 48h ouvrées)
+                                </p>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telephone">Téléphone *</label>
-                        <input type="tel" id="telephone" name="telephone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="motif">Motif de consultation *</label>
-                        <select id="motif" name="motif" required>
-                            <option value="">Sélectionner un motif</option>
-                            <option value="bilan-initial">Bilan initial</option>
-                            <option value="troubles-apprentissages">Troubles des apprentissages</option>
-                            <option value="tsa">Trouble du Spectre Autistique</option>
-                            <option value="habiletes-visuelles">Troubles des habiletés visuelles</option>
-                            <option value="motricite-fine">Difficultés de motricité fine</option>
-                            <option value="adaptation-domicile">Adaptation du domicile</option>
-                            <option value="evaluation-senior">Évaluation personne âgée</option>
-                            <option value="autre">Autre motif</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="urgence">Demande de consultation</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="urgence" value="normal" checked>Dans le mois</label>
-                            <label><input type="radio" name="urgence" value="urgent">Dans les 3 mois</label>
-                            <label><input type="radio" name="urgence" value="tres-urgent">Dans l'année</label>
+
+                    <!-- COLONNE DROITE : Informations Contact -->
+                    <aside class="contact-info-wrapper">
+                        <div class="contact-info-card">
+                            <h3>Coordonnées</h3>
+
+                            <div class="info-item">
+                                <span class="icon">📞</span>
+                                <div>
+                                    <strong>Téléphone</strong>
+                                    <a href="tel:+33612345678">06 12 34 56 78</a>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+
+                                <div>
+                                    <strong>Email</strong>
+                                    <a
+                                        href="mailto:edwina.decherf@ergotherapeute.com">edwina.decherf@ergotherapeute.com</a>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="icon">🏥</span>
+                                <div>
+                                    <strong>Adresse</strong>
+                                    <address>
+                                        Maison de Santé Pluridisciplinaire<br>
+                                        Avenue Jules Edouard Menard<br>
+                                        86230 Saint-Gervais-les-Trois-Clochers
+                                    </address>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="icon">🕒</span>
+                                <div>
+                                    <strong>Horaires</strong>
+                                    <p>
+                                        Mardi et Mercredi<br>
+                                        Sur rendez-vous uniquement
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="icon">♿</span>
+                                <div>
+                                    <strong>Accessibilité</strong>
+                                    <p>
+                                        Cabinet accessible PMR<br>
+                                        Parking gratuit disponible
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Tranche d'âge</label>
-                        <select id="age" name="age">
-                            <option value="">Non précisé</option>
-                            <option value="petite-enfance">Petite enfance (0-6 ans)</option>
-                            <option value="enfant">Enfant (7-12 ans)</option>
-                            <option value="adolescent">Adolescent (13-17 ans)</option>
-                            <option value="adulte">Adulte (18-64 ans)</option>
-                            <option value="senior">Senior (65+ ans)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message complémentaire</label>
-                        <textarea id="message" name="message" rows="4"
-                            placeholder="Décrivez brièvement votre demande ou les difficultés rencontrées..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Envoyer la demande</button>
-                </form>
+
+                        <div class="urgence-note">
+                            <span class="icon">⚠️</span>
+                            <p>
+                                <strong>En cas d'urgence médicale</strong>, contactez le 15 (SAMU) ou le 112 (urgences
+                                européennes).
+                            </p>
+                        </div>
+                    </aside>
+                </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
