@@ -276,7 +276,7 @@ class ContactForm {
 
   showSuccess() {
     this.showMessage(
-      "✅ Votre demande a été transmise avec succès ! Je vous recontacterai sous 48h pour convenir d'un rendez-vous.",
+      "Votre demande a été transmise avec succès ! Je vous recontacterai prochainement pour convenir d'un rendez-vous.",
       "success"
     );
 
