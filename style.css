@@ -203,6 +203,13 @@ body {
   box-shadow: 0 4px 6px rgba(123, 193, 66, 0.3);
 }
 
+#profession .cta-btn {
+  width: 300px;
+  display: block;
+  margin:1rem auto 0;
+  text-align: center;
+}
+
 .cta-btn:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
@@ -273,12 +280,11 @@ body {
     width: 90%;
     text-align: center;
   }
-    #profession > div > div > div > ul > li {
+  #profession > div > div > div > ul > li {
     margin: auto;
     width: 90%;
     text-align: left;
   }
-
 }
 
 #profession > div > div > div > h3 {
