@@ -52,7 +52,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 85px;
+  height: 88px;
 }
 
 /* ========================================
@@ -67,9 +67,19 @@ body {
 .nav-logo {
   width: 120px;
   height: auto;
-  padding: 1rem;
+  padding: 1.1rem;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-logo:active {
+  transform: scale(0.95);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-brand-text {
@@ -248,9 +258,8 @@ body {
 
 #profession > div > div.content-grid > div.content-text {
   padding: 0 5rem;
-text-align: center;
+  text-align: center;
 }
-
 
 .content-text h2 {
   color: var(--primary);
@@ -1052,9 +1061,6 @@ text-align: center;
     gap: 2rem;
   }
 
-
-
-  
   .timeline {
     padding: 0 1rem;
   }
@@ -1341,9 +1347,9 @@ text-align: center;
 /* Responsive Profession */
 @media (max-width: 768px) {
   .profession-gallery .gallery-container {
-  max-width: 500px;
-  height: auto;
-  margin: 0 auto;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
   }
 
   .profession-gallery .gallery-main-image {
@@ -1361,9 +1367,9 @@ text-align: center;
     margin: 1.5rem 0 2rem;
   }
   .profession-gallery .gallery-container {
-  max-width: 400px;
-  height: auto;
-  margin: 0 auto;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
   }
 
   .profession-gallery .gallery-main-image {
@@ -1730,6 +1736,17 @@ text-align: center;
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   object-fit: cover;
+}
+
+.footer-about .footer-logo:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-about .footer-logo:active {
+  transform: scale(0.95);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .footer-about p {
