@@ -986,7 +986,7 @@ body {
 /* ========================================
    RESPONSIVE - TABLETTE & MOBILE
    ======================================== */
-@media (max-width: 680px) {
+@media (max-width: 900px) {
   .nav-menu {
     position: fixed;
     top: 70px;
@@ -1414,4 +1414,390 @@ body {
       z-index: 10;
     }
   }
+}
+
+/* ============================================
+   PAGES LÉGALES (Mentions Légales + RGPD)
+   ============================================ */
+
+/* Container général */
+.legal-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: #555;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+/* Sections légales */
+.legal-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.legal-section:last-child {
+    border-bottom: none;
+}
+
+.legal-section h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.legal-section h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.legal-section p {
+    margin-bottom: 1rem;
+}
+
+.legal-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+
+.legal-section ul li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+}
+
+.legal-section ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Box d'information */
+.info-box,
+.warning-box,
+.success-box {
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.info-box {
+    background: #e3f2fd;
+    border-color: #2196f3;
+    color: #0d47a1;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.success-box {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+/* Tableau conservation données */
+.data-retention-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+}
+
+.data-retention-table th,
+.data-retention-table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.data-retention-table th {
+    background: var(--primary-color);
+    color: rgb(125, 125, 125);
+    font-weight: 600;
+}
+
+.data-retention-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.data-retention-table tbody tr:hover {
+    background: #e8f5e9;
+}
+
+/* Grille droits RGPD */
+.rights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.right-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.right-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.right-card h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.right-card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Section contact */
+.contact-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 3rem;
+}
+
+.contact-section h2 {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.contact-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.contact-card .icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.contact-card strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.contact-card a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+}
+
+.contact-card a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.contact-card p {
+    color: white;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legal-content {
+        padding: 0 1rem;
+    }
+
+    .data-retention-table {
+        font-size: 0.85rem;
+    }
+
+    .data-retention-table th,
+    .data-retention-table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .rights-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.site-footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Footer About */
+.footer-about .footer-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-about p {
+    color: #bdc3c7;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.footer-address {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* Footer Lists */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-section ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: inline-block;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+/* Footer Contact */
+.footer-contact ul li {
+    display: flex;
+    align-items: start;
+    gap: 0.5rem;
+}
+
+.footer-contact .icon {
+    font-size: 1.2rem;
+    min-width: 24px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #95a5a6;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.footer-credits {
+    font-size: 0.85rem;
+}
+
+.footer-credits strong {
+    color: var(--primary-color);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-about .footer-logo {
+        margin: 0 auto 1rem;
+        display: block;
+    }
+
+    .footer-contact ul li {
+        justify-content: center;
+    }
+}
+
+/* Masquer liens légaux du menu principal (desktop) */
+nav .legal-links {
+    display: none;
+}
+
+/* Afficher dans le menu mobile */
+@media (max-width: 900px) {
+    nav .legal-links {
+        display: block;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+    }
+
+    nav .legal-links a {
+        font-size: 0.85rem;
+        color: #bdc3c7;
+    }
 }
