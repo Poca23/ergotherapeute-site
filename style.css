@@ -1708,9 +1708,11 @@ body {
 
 /* Footer About */
 .footer-about .footer-logo {
-  max-width: 150px;
-  height: auto;
-  margin-bottom: 1rem;
+    height: auto;
+    max-height: 120px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    object-fit: cover;
 }
 
 .footer-about p {
