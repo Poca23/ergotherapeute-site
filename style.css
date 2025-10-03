@@ -840,11 +840,12 @@ body {
 }
 
 .contact-item.important {
-  background: linear-gradient(135deg, var(--warning), var(--secondary));
-  color: white;
+  background: white;
+  color: var(--warning);
   width: fit-content;
   margin: 1rem auto;
   justify-content: center;
+  border: 2px solid var(--warning);
 }
 
 .contact-item h3 {
@@ -853,7 +854,7 @@ body {
 }
 
 .contact-item.important h3 {
-  color: white;
+  color: var(--warning);
 }
 
 .contact-item a {
