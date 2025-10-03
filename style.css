@@ -256,9 +256,39 @@ body {
   gap: 3rem;
 }
 
-#profession > div > div.content-grid > div.content-text {
-  padding: 0 5rem;
+#profession > div > h2 {
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+#profession > div > div > div > p {
+  margin: auto;
+  width: 750px;
+  text-align: center;
+}
+
+@media (max-width: 780px) {
+  #profession > div > div > div > p {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+  }
+    #profession > div > div > div > ul > li {
+    margin: auto;
+    width: 90%;
+    text-align: left;
+  }
+
+}
+
+#profession > div > div > div > h3 {
+  text-align: center;
+}
+
+#profession > div > div > div > ul > li {
+  margin: auto;
+  width: 400px;
+  text-align: left;
 }
 
 .content-text h2 {
@@ -1189,15 +1219,15 @@ body {
 
 /* Image principale */
 .gallery-main-image {
-  width: 100%;
-  height: auto;
   display: block;
-  aspect-ratio: 16/9;
+  aspect-ratio: 10/10;
   object-fit: cover;
   transition: opacity 0.3s ease;
 }
 
 .gallery-main-image.lazy-load {
+  width: 100%;
+  height: auto;
   opacity: 0;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
@@ -1460,6 +1490,7 @@ body {
 
 /* Container général */
 .legal-content {
+  text-align: center;
   max-width: 900px;
   margin: 0 auto;
   line-height: 1.8;
@@ -1511,6 +1542,9 @@ body {
 }
 
 .legal-section ul li {
+  text-align: justify;
+  margin: auto;
+  max-width: 500px;
   padding: 0.5rem 0 0.5rem 2rem;
   position: relative;
 }

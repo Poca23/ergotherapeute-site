@@ -595,7 +595,7 @@ class App {
     // 📸 INITIALISATION GALERIES
     // ============================================
 
-    // Galerie Cabinet (3 photos)
+    // Galerie Cabinet (5 photos)
     const cabinetGallery = new GalleryManager("cabinetGallery", [
       {
         src: "images/photos/entree_7_11zon.webp",
@@ -603,14 +603,29 @@ class App {
         caption: "Entrée de la Maison médicale",
       },
       {
+        src: "images/photos/materiel2_9_11zon.webp",
+        alt: "Matériel spécialisé ergothérapie",
+        caption: "Jouets et matériel spécialisé",
+      },
+      {
         src: "images/photos/cabinet2_2_11zon.webp",
         alt: "Bureau de consultation ergothérapie",
         caption: "Bureau de consultation",
       },
       {
+        src: "images/photos/materiel3_10_11zon.webp",
+        alt: "Matériel spécialisé ergothérapie",
+        caption: "Jouets et matériel spécialisé",
+      },
+      {
         src: "images/photos/cabinet3_3_11zon.webp",
         alt: "Coin activités pour enfants",
         caption: "Coin activités pour enfants",
+      },
+      {
+        src: "images/photos/materiel1_8_11zon.webp",
+        alt: "Matériel spécialisé ergothérapie",
+        caption: "Jouets et matériel spécialisé",
       },
     ]);
 
