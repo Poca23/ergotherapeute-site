@@ -15,11 +15,11 @@
   --error: #ef4444;
   --warning: #ff6b35;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 * {
-  margin: 0;
+  margin: auto0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -202,12 +202,18 @@ body {
    IMAGE HERO - OPTIMISATION PLAQUE
    ======================================== */
 .hero-image img {
-  width: 100%;
+  margin: auto;
+  padding: auto;
   height: auto;
+  max-height: 300px;
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   object-fit: cover;
-  max-height: 400px;
+}
+
+.plaque {
+  text-align: center;
+  margin-top: 1.5rem;
 }
 
 .profile-content {
@@ -1019,12 +1025,11 @@ body {
   }
 
   .hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-card);
-    object-fit: cover;
-    max-height: 400px;
+  height: auto;
+  max-height: 300px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  object-fit: cover;
   }
 
   .hero-content h2 {
