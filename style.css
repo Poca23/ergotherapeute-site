@@ -842,6 +842,9 @@ body {
 .contact-item.important {
   background: linear-gradient(135deg, var(--warning), var(--secondary));
   color: white;
+  width: fit-content;
+  margin: 1rem auto;
+  justify-content: center;
 }
 
 .contact-item h3 {
