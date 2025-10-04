@@ -206,7 +206,7 @@ body {
 #profession .cta-btn {
   width: 300px;
   display: block;
-  margin:1rem auto 0;
+  margin: 1rem auto 0;
   text-align: center;
 }
 
@@ -232,6 +232,25 @@ body {
 .plaque {
   text-align: center;
   margin-top: 1.5rem;
+}
+
+#accueil > div.plaque > img {
+  margin: auto;
+  max-width: 400px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  object-fit: cover;
+}
+
+@media (max-width: 780px) {
+  #accueil > div.plaque > img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    object-fit: cover;
+  }
 }
 
 .profile-content {
@@ -263,7 +282,7 @@ body {
   gap: 3rem;
 }
 
-#profession > div > h2 {
+profession > div > h2 {
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -280,11 +299,6 @@ body {
     width: 90%;
     text-align: center;
   }
-  #profession > div > div > div > ul > li {
-    margin: auto;
-    width: 90%;
-    text-align: left;
-  }
 }
 
 #profession > div > div > div > h3 {
@@ -293,10 +307,9 @@ body {
 
 #profession > div > div > div > ul > li {
   margin: auto;
-  width: 400px;
+  width: min(500px, 90%);
   text-align: left;
 }
-
 .content-text h2 {
   color: var(--primary);
   font-size: 2.5rem;
@@ -1179,7 +1192,9 @@ body {
 
   /* Image hero mobile */
   .hero-image img {
-    max-height: 300px;
+    margin: auto 0;
+    max-height: 220px;
+    width: auto;
   }
 }
 
