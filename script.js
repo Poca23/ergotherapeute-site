@@ -41,18 +41,29 @@ class Navigation {
   }
   navigateTo(section) {
     if (state.currentSection === section) return;
+
+    // 1. Cacher section actuelle
     $(`#${state.currentSection}`)?.classList.remove("active");
+
     setTimeout(() => {
       const newSection = $(`#${section}`);
       if (newSection) {
+        // 2. Afficher nouvelle section
         newSection.classList.add("active");
         state.currentSection = section;
         this.updateActiveNav(section);
         history.replaceState(null, null, `#${section}`);
+
+        // 🔥 FIX MOBILE : Forcer scroll top après transition
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 50);
       }
     }, 150);
+
     this.closeMobileMenu();
   }
+
   updateActiveNav(section) {
     this.navLinks.forEach((link) =>
       link.classList.toggle("active", link.dataset.section === section)
