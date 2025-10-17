@@ -1,51 +1,54 @@
 📖 README.md
+
 # 🏥 Site Web Ergothérapeute - Edwina Decherf
 
 > Application web moderne pour cabinet d'ergothérapie spécialisé en pédiatrie et gériatrie.  
 > Single Page Application (SPA) + Progressive Web App (PWA) conformes RGPD.
 
-**🌐 Production** : [https://ergotherapeuthe-decherf.netlify.app](https://ergotherapeuthe-decherf.netlify.app)
+**🌐 Production** : [https://ergotherapeute-decherf.netlify.app](https://ergotherapeute-decherf.netlify.app)
 
 ---
 
 ## ✨ Fonctionnalités
 
-| Fonctionnalité | Description |
-|----------------|-------------|
-| **SPA** | Navigation fluide entre 8 sections sans rechargement |
-| **PWA** | Installable sur mobile/desktop, fonctionne hors ligne |
-| **Responsive** | Design adaptatif mobile-first (< 480px → > 768px) |
-| **Formulaire Contact** | Validation temps réel + EmailJS intégré |
-| **SEO** | Meta-tags dynamiques + Schema.org JSON-LD |
-| **Galeries Photos** | Carrousel interactif (clavier, tactile, boutons) |
-| **Timeline** | Formations avec animations scroll reveal |
-| **Tarifs** | Grille responsive avec modalités détaillées |
-| **RGPD** | Pages légales conformes (Mentions + Confidentialité) |
+| Fonctionnalité         | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| **SPA**                | Navigation fluide entre 8 sections sans rechargement  |
+| **PWA**                | Installable sur mobile/desktop, fonctionne hors ligne |
+| **Responsive**         | Design adaptatif mobile-first (< 480px → > 768px)     |
+| **Formulaire Contact** | Validation temps réel + EmailJS intégré               |
+| **SEO**                | Meta-tags dynamiques + Schema.org JSON-LD             |
+| **Galeries Photos**    | Carrousel interactif (clavier, tactile, boutons)      |
+| **Timeline**           | Formations avec animations scroll reveal              |
+| **Tarifs**             | Grille responsive avec modalités détaillées           |
+| **RGPD**               | Pages légales conformes (Mentions + Confidentialité)  |
 
 ---
 
 ## 🛠️ Stack Technique
-Frontend    : HTML5, CSS3, Vanilla JavaScript (ES6+)
+
+Frontend : HTML5, CSS3, Vanilla JavaScript (ES6+)
 Architecture: SPA avec routage hash-based
-Email       : EmailJS (service_do1z2ic)
-PWA         : Service Worker + Manifest
+Email : EmailJS (service_do1z2ic)
+PWA : Service Worker + Manifest
 Hébergement : Netlify (HTTPS + déploiement continu)
-Build       : Aucun - Code vanilla optimisé
+Build : Aucun - Code vanilla optimisé
 
 ### Aucune dépendance externe (sauf EmailJS CDN)
 
 ---
 
 ## 📁 Structure du Projet
+
 📦 ergotherapeute-decherf/
-├── 📄 index.html          # HTML principal (8 sections)
-├── 🎨 style.css           # Styles CSS (custom properties)
-├── ⚡ script.js           # Logique JavaScript (6 classes ES6)
-├── 📄 README.md           # Ce fichier
-├── 📄 manifest.json       # Manifeste PWA
+├── 📄 index.html # HTML principal (8 sections)
+├── 🎨 style.css # Styles CSS (custom properties)
+├── ⚡ script.js # Logique JavaScript (6 classes ES6)
+├── 📄 README.md # Ce fichier
+├── 📄 manifest.json # Manifeste PWA
 └── 📁 images/
-    ├── logos/             # Logo + favicons
-    └── photos/            # Photos cabinet (.webp optimisées)
+├── logos/ # Logo + favicons
+└── photos/ # Photos cabinet (.webp optimisées)
 
 ---
 
@@ -282,21 +285,20 @@ Licence
 Propriétaire
 
 URL Production
-https://ergotherapeuthe-decherf.netlify.app
+https://ergotherapeute-decherf.netlify.app
 
 
 
 📞 Support
 Pour toute question ou demande d'évolution :
 📧 Email : cndweb37@gmail.com
-🌐 Site : https://ergotherapeuthe-decherf.netlify.app
+🌐 Site : https://ergotherapeute-decherf.netlify.app
 
 ✅ Projet terminé avec succès⚖️ Conforme RGPD
 
 Développé avec ❤️ par CND - Web Is Yours
 
 ```
-
 
 🎯 Résumé des Modifications (v1.0.9)
 ✅ Ajouts
@@ -315,8 +317,8 @@ Documentation mise à jour (Contexte.md + README.md)
 +400 lignes CSS (styles légaux + footer)
 100% conformité RGPD ✅
 
-
 <div align="center">
 
 Version 1.0.9 finale • Octobre 2025 • CND - Web Is Yours
+
 </div>
