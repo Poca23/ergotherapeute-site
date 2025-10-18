@@ -1777,11 +1777,17 @@ profession > div > h2 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  align-items: start;
+}
+
+.footer-section {
+  margin: 0;
 }
 
 .footer-section h3 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  margin-top: 0;
   color: var(--primary-color);
   border-bottom: 2px solid var(--primary-color);
   padding-bottom: 0.5rem;
