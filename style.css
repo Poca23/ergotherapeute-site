@@ -665,10 +665,11 @@ profession > div > h2 {
 
 /* --- Hints --- */
 .form-hint {
-  display: block;
   margin-top: 0.25rem;
   font-size: 0.875rem;
   color: #6b7280;
+  font-weight: 400;
+  font-style: italic;
 }
 
 /* --- Checkbox RGPD --- */
