@@ -35,19 +35,16 @@ class Navigation {
   }
 
   navigateTo(section) {
-    // 1. Cacher section actuelle
     $(`#${state.currentSection}`)?.classList.remove("active");
 
     setTimeout(() => {
       const newSection = $(`#${section}`);
       if (newSection) {
-        // 2. Afficher nouvelle section
         newSection.classList.add("active");
         state.currentSection = section;
         this.updateActiveNav(section);
         history.replaceState(null, null, `#${section}`);
 
-        // 🔥 FIX MOBILE : Forcer scroll top après transition
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 50);
@@ -121,7 +118,6 @@ class ContactForm {
   init() {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
 
-    // Validation en temps réel
     Object.values(this.fields).forEach((field) => {
       if (field) {
         field.addEventListener("blur", () => this.validateField(field));
@@ -198,25 +194,20 @@ class ContactForm {
 
   validateField(field) {
     const value = field.value.trim();
-    const fieldName = field.getAttribute("name");
     let errorMessage = "";
 
-    // Champs obligatoires
     if (field.hasAttribute("required") && !value) {
       errorMessage = "Ce champ est obligatoire";
     }
 
-    // Validation email
     if (field.type === "email" && value && !this.isValidEmail(value)) {
       errorMessage = "Email invalide";
     }
 
-    // Validation téléphone
     if (field.type === "tel" && value && !this.isValidPhone(value)) {
       errorMessage = "Numéro invalide (ex: 06 12 34 56 78)";
     }
 
-    // Checkbox RGPD
     if (field.type === "checkbox" && field.id === "rgpd" && !field.checked) {
       errorMessage = "Vous devez accepter la politique de confidentialité";
     }
@@ -512,118 +503,124 @@ class SEO {
 }
 
 // =============================================
-// CLASSE GALLERY MANAGER
+// CLASSE GALLERY AVEC AUTOPLAY
 // =============================================
-class GalleryManager {
-  constructor(containerId, images) {
-    this.container = document.getElementById(containerId);
+class Gallery {
+  constructor(id, images) {
+    this.container = document.getElementById(id);
     if (!this.container) return;
 
     this.images = images;
-    this.currentIndex = 0;
+    this.current = 0;
+    this.img = this.container.querySelector(".gallery-main-image");
+    this.caption = this.container.querySelector(".caption-text");
+    this.autoplayInterval = null;
+
     this.init();
   }
 
   init() {
-    this.render();
-    this.attachEvents();
-  }
+    // Navigation boutons
+    const prevBtn = this.container.querySelector(".gallery-prev");
+    const nextBtn = this.container.querySelector(".gallery-next");
 
-  render() {
-    this.container.innerHTML = `
-      <div class="gallery-main">
-        <img 
-          src="${this.images[0].src}" 
-          alt="${this.images[0].alt}"
-          class="gallery-image"
-          loading="lazy"
-        >
-        <button class="gallery-btn prev" aria-label="Image précédente">‹</button>
-        <button class="gallery-btn next" aria-label="Image suivante">›</button>
-      </div>
-      <div class="gallery-indicators">
-        ${this.images
-          .map(
-            (_, i) =>
-              `<span class="indicator ${
-                i === 0 ? "active" : ""
-              }" data-index="${i}"></span>`
-          )
-          .join("")}
-      </div>
-      <p class="gallery-caption">${this.images[0].caption}</p>
-    `;
-  }
+    if (prevBtn) prevBtn.onclick = () => this.manualNav(() => this.prev());
+    if (nextBtn) nextBtn.onclick = () => this.manualNav(() => this.next());
 
-  attachEvents() {
-    // Boutons précédent/suivant
-    this.container
-      .querySelector(".prev")
-      .addEventListener("click", () => this.prev());
-    this.container
-      .querySelector(".next")
-      .addEventListener("click", () => this.next());
-
-    // Indicateurs cliquables
-    this.container.querySelectorAll(".indicator").forEach((indicator) => {
-      indicator.addEventListener("click", (e) => {
-        const index = parseInt(e.target.dataset.index);
-        this.goTo(index);
-      });
+    // Indicateurs
+    this.container.querySelectorAll(".indicator").forEach((btn, i) => {
+      btn.onclick = () => this.manualNav(() => this.goto(i));
     });
 
-    // Navigation clavier
+    // Clavier
     document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") this.prev();
-      if (e.key === "ArrowRight") this.next();
+      if (e.key === "ArrowLeft") this.manualNav(() => this.prev());
+      if (e.key === "ArrowRight") this.manualNav(() => this.next());
     });
 
-    // Swipe tactile
+    // Swipe mobile
     let startX = 0;
-    const img = this.container.querySelector(".gallery-image");
-
-    img.addEventListener("touchstart", (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    img.addEventListener("touchend", (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-
+    this.img.addEventListener(
+      "touchstart",
+      (e) => (startX = e.touches[0].clientX)
+    );
+    this.img.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
-        diff > 0 ? this.next() : this.prev();
+        this.manualNav(() => (diff > 0 ? this.next() : this.prev()));
       }
     });
+
+    // Lazy load
+    if (this.img.dataset.src) {
+      this.img.src = this.img.dataset.src;
+      this.img.onload = () => this.img.classList.add("loaded");
+    }
+
+    // Démarrer autoplay
+    this.startAutoplay();
+
+    // Pause sur hover (desktop uniquement)
+    if (window.innerWidth > 768) {
+      this.container.addEventListener("mouseenter", () => this.stopAutoplay());
+      this.container.addEventListener("mouseleave", () => this.startAutoplay());
+    }
+  }
+
+  manualNav(action) {
+    this.stopAutoplay();
+    action();
+    setTimeout(() => this.startAutoplay(), 5000); // Reprend après 5s
+  }
+
+  startAutoplay() {
+    this.stopAutoplay(); // Clear existing
+    this.autoplayInterval = setInterval(() => this.next(), 4000); // 4s entre chaque
+  }
+
+  stopAutoplay() {
+    if (this.autoplayInterval) {
+      clearInterval(this.autoplayInterval);
+      this.autoplayInterval = null;
+    }
   }
 
   prev() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.images.length) % this.images.length;
-    this.updateImage();
+    this.current = (this.current - 1 + this.images.length) % this.images.length;
+    this.update();
   }
 
   next() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    this.updateImage();
+    this.current = (this.current + 1) % this.images.length;
+    this.update();
   }
 
-  goTo(index) {
-    this.currentIndex = index;
-    this.updateImage();
+  goto(i) {
+    this.current = i;
+    this.update();
   }
 
-  updateImage() {
-    const img = this.container.querySelector(".gallery-image");
-    const caption = this.container.querySelector(".gallery-caption");
-    const indicators = this.container.querySelectorAll(".indicator");
+  update() {
+    // Fade out
+    this.img.style.opacity = "0";
 
-    img.src = this.images[this.currentIndex].src;
-    img.alt = this.images[this.currentIndex].alt;
-    caption.textContent = this.images[this.currentIndex].caption;
+    setTimeout(() => {
+      this.img.src = this.images[this.current].src;
+      this.img.alt = this.images[this.current].alt;
 
-    indicators.forEach((ind, i) => {
-      ind.classList.toggle("active", i === this.currentIndex);
-    });
+      // Mise à jour caption si elle existe
+      if (this.caption) {
+        this.caption.textContent = this.images[this.current].caption;
+      }
+
+      // Mise à jour indicateurs
+      this.container.querySelectorAll(".indicator").forEach((btn, i) => {
+        btn.classList.toggle("active", i === this.current);
+      });
+
+      // Fade in
+      this.img.style.opacity = "1";
+    }, 300);
   }
 }
 
@@ -642,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
   emailjs.init("atEnZgePdH88zB9jU");
 
   // Galerie Cabinet
-  const cabinetGallery = new GalleryManager("cabinetGallery", [
+  new Gallery("cabinetGallery", [
     {
       src: "images/photos/entree_7_11zon.webp",
       alt: "Entrée de la Maison médicale",
@@ -650,31 +647,46 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       src: "images/photos/materiel2_9_11zon.webp",
-      alt: "Matériel spécialisé ergothérapie",
+      alt: "Matériel spécialisé",
       caption: "Jouets et matériel spécialisé",
     },
     {
       src: "images/photos/cabinet2_2_11zon.webp",
-      alt: "Bureau de consultation ergothérapie",
+      alt: "Bureau de consultation",
       caption: "Bureau de consultation",
     },
     {
       src: "images/photos/materiel3_10_11zon.webp",
-      alt: "Matériel spécialisé ergothérapie",
+      alt: "Matériel spécialisé",
       caption: "Jouets et matériel spécialisé",
     },
     {
       src: "images/photos/cabinet3_3_11zon.webp",
-      alt: "Coin activités pour enfants",
+      alt: "Coin activités",
       caption: "Coin activités pour enfants",
     },
     {
       src: "images/photos/materiel1_8_11zon.webp",
-      alt: "Matériel spécialisé ergothérapie",
+      alt: "Matériel spécialisé",
       caption: "Jouets et matériel spécialisé",
     },
   ]);
 
+  // Galerie Profession
+  new Gallery("professionGallery", [
+    {
+      src: "images/photos/action-enfant.webp",
+      alt: "Ergothérapie pédiatrique",
+      caption: "Accompagnement en ergothérapie pédiatrique",
+    },
+    {
+      src: "images/photos/action-senior.webp",
+      alt: "Ergothérapie gériatrique",
+      caption: "Accompagnement en ergothérapie gériatrique",
+    },
+  ]);
+
+  // Gestion champ "Autre" dans source
   const selectSource = document.getElementById("source");
   const autreGroup = document.getElementById("source-autre-group");
   const autreInput = document.getElementById("source-autre");
@@ -686,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
         autreInput.focus();
       } else {
         autreGroup.style.display = "none";
-        autreInput.value = ""; // Reset
+        autreInput.value = "";
       }
     });
   }
