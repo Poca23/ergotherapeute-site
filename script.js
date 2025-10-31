@@ -110,7 +110,7 @@ class ContactForm {
       personnePrenom: this.form.querySelector("#personne-prenom"),
       dateNaissance: this.form.querySelector("#date-naissance"),
       classe: this.form.querySelector("#classe"),
-      ecole: this.form.querySelector("#ecole"),
+      ville: this.form.querySelector("#ville"),
       message: this.form.querySelector("#message"),
       rgpd: this.form.querySelector("#rgpd"),
     };
@@ -229,7 +229,7 @@ class ContactForm {
       personne_prenom: this.fields.personnePrenom.value.trim(),
       date_naissance: this.fields.dateNaissance.value,
       classe: this.fields.classe.value.trim() || "Non renseignée",
-      ecole: this.fields.ecole.value.trim() || "Non renseignée",
+      ville: this.fields.ville?.value.trim() || "Non renseignée",
       message: this.fields.message.value.trim(),
       date_demande: new Date().toLocaleDateString("fr-FR"),
     };
@@ -582,6 +582,139 @@ class SEO {
   }
 }
 
+class CityAutocomplete {
+  constructor(inputId) {
+    this.input = document.getElementById(inputId);
+    if (!this.input) return;
+
+    this.suggestionsBox = document.getElementById(`${inputId}-suggestions`);
+    this.selectedIndex = -1;
+    this.cities = [];
+
+    this.init();
+  }
+
+  init() {
+    this.input.addEventListener("input", (e) => this.handleInput(e));
+    this.input.addEventListener("keydown", (e) => this.handleKeyboard(e));
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".form-group")) {
+        this.hideSuggestions();
+      }
+    });
+  }
+
+  async handleInput(e) {
+    const query = e.target.value.trim();
+
+    if (query.length < 2) {
+      this.hideSuggestions();
+      return;
+    }
+
+    const cities = await this.searchCities(query);
+    this.displaySuggestions(cities);
+  }
+
+  async searchCities(query) {
+    try {
+      const url = `https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(
+        query
+      )}&fields=nom,code,codesPostaux,departement&limit=5`;
+      const response = await fetch(url);
+      const data = await response.json();
+
+      return data.map((city) => ({
+        name: city.nom,
+        postalCode: city.codesPostaux[0],
+        dept: city.departement.code,
+      }));
+    } catch (error) {
+      console.error("Erreur API Geo:", error);
+      return [];
+    }
+  }
+
+  displaySuggestions(cities) {
+    this.cities = cities;
+
+    if (cities.length === 0) {
+      this.hideSuggestions();
+      return;
+    }
+
+    this.suggestionsBox.innerHTML = cities
+      .map(
+        (city, index) => `
+        <div class="autocomplete-item" role="option" data-index="${index}">
+          <strong>${city.name}</strong> (${city.postalCode}) - ${city.dept}
+        </div>
+      `
+      )
+      .join("");
+
+    this.suggestionsBox
+      .querySelectorAll(".autocomplete-item")
+      .forEach((item) => {
+        item.addEventListener("click", () =>
+          this.selectCity(parseInt(item.dataset.index))
+        );
+      });
+
+    this.suggestionsBox.classList.add("active");
+    this.selectedIndex = -1;
+  }
+
+  handleKeyboard(e) {
+    const items = this.suggestionsBox.querySelectorAll(".autocomplete-item");
+
+    if (!this.suggestionsBox.classList.contains("active")) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        this.selectedIndex = Math.min(this.selectedIndex + 1, items.length - 1);
+        this.updateSelection(items);
+        break;
+
+      case "ArrowUp":
+        e.preventDefault();
+        this.selectedIndex = Math.max(this.selectedIndex - 1, -1);
+        this.updateSelection(items);
+        break;
+
+      case "Enter":
+        e.preventDefault();
+        if (this.selectedIndex >= 0) {
+          this.selectCity(this.selectedIndex);
+        }
+        break;
+
+      case "Escape":
+        this.hideSuggestions();
+        break;
+    }
+  }
+
+  updateSelection(items) {
+    items.forEach((item, index) => {
+      item.classList.toggle("selected", index === this.selectedIndex);
+    });
+  }
+
+  selectCity(index) {
+    const city = this.cities[index];
+    this.input.value = `${city.name} (${city.postalCode})`;
+    this.hideSuggestions();
+  }
+
+  hideSuggestions() {
+    this.suggestionsBox.classList.remove("active");
+    this.selectedIndex = -1;
+  }
+}
+
 class App {
   constructor() {
     this.navigation = new Navigation();
@@ -601,6 +734,8 @@ class App {
       document.body.classList.add("loaded");
       state.isLoading = false;
     }, 100);
+
+    new CityAutocomplete("ville");
 
     // ============================================
     // 📸 INITIALISATION GALERIES

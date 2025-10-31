@@ -935,13 +935,18 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ecole">
-                                        École
+                                    <label for="ville">
+                                        Ville d'habitation <span class="required">*</span>
+                                        <small id="ville-hint" class="form-hint">(Minimum 2 caractères)</small>
                                     </label>
-                                    <input type="text" id="ecole" name="ecole" placeholder="Nom de l'établissement"
-                                        aria-describedby="ecole-hint">
-                                    <small id="ecole-hint" class="form-hint">Optionnel</small>
+                                    <input type="text" id="ville" name="ville"
+                                        placeholder="Tapez votre ville ou code postal" autocomplete="off" required
+                                        aria-describedby="ville-hint" aria-autocomplete="list"
+                                        aria-controls="ville-suggestions">
+                                    <div id="ville-suggestions" class="autocomplete-suggestions" role="listbox"></div>
+                                    <span id="ville-error" class="error-message" role="alert"></span>
                                 </div>
+
                             </fieldset>
 
                             <!-- PARTIE 3 : Demande -->

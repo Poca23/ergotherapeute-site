@@ -1917,3 +1917,49 @@ nav .legal-links {
     color: #bdc3c7;
   }
 }
+
+/* --- Autocomplete Ville --- */
+.autocomplete-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid var(--primary-color);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+.autocomplete-suggestions.active {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background: rgba(123, 193, 66, 0.1);
+}
+
+.autocomplete-item strong {
+  color: var(--primary-color);
+}
+
+/* Responsive autocomplete */
+.form-group {
+  position: relative;
+}
