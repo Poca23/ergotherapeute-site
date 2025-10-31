@@ -186,6 +186,20 @@ body {
   color: var(--text-light);
 }
 
+.links-pco {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.links-pco:hover {
+  text-decoration: underline;
+}
+
+.links-pco::after {
+  font-size: 1rem;
+}
+
 /* ========================================
    BOUTON CTA
    ======================================== */
@@ -242,6 +256,10 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow-card);
   object-fit: cover;
+}
+
+#accueil > div.hero > div.hero-image {
+  margin: auto;
 }
 
 @media (max-width: 780px) {
