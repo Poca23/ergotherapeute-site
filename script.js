@@ -1,47 +1,40 @@
-const config = {
-  emailService: "mailto:edwinadecherf@gmail.com",
-  emailjs: {
-    publicKey: "atEnZgePdH88zB9jU",
-    serviceId: "service_do1z2ic",
-    templateId: "template_sjc6l0i",
-  },
-  lang: "fr",
+// =============================================
+// ÉTAT GLOBAL
+// =============================================
+const state = {
+  currentSection: "accueil",
+  isMenuOpen: false,
 };
 
-const state = { currentSection: "accueil", isMenuOpen: false, isLoading: true };
-const $ = (s) => document.querySelector(s),
-  $$ = (s) => document.querySelectorAll(s);
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
+// =============================================
+// CLASSE NAVIGATION
+// =============================================
 class Navigation {
   constructor() {
-    this.sections = $$(".section");
     this.navLinks = $$(".nav-link");
+    this.sections = $$(".section");
     this.init();
   }
+
   init() {
-    this.navLinks.forEach((link) =>
+    this.navLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        this.navigateTo(link.dataset.section);
-      })
-    );
-    $$("[data-section]").forEach((btn) => {
-      if (!btn.classList.contains("nav-link"))
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          this.navigateTo(btn.dataset.section);
-        });
+        const section = link.dataset.section;
+        this.navigateTo(section);
+      });
     });
-    window.addEventListener("hashchange", () => {
-      const hash = window.location.hash.slice(1);
-      if (hash) this.navigateTo(hash);
-    });
-    const initialHash = window.location.hash.slice(1);
-    if (initialHash) this.navigateTo(initialHash);
-  }
-  navigateTo(section) {
-    if (state.currentSection === section) return;
 
+    const hash = window.location.hash.slice(1);
+    if (hash && $(`#${hash}`)) {
+      this.navigateTo(hash);
+    }
+  }
+
+  navigateTo(section) {
     // 1. Cacher section actuelle
     $(`#${state.currentSection}`)?.classList.remove("active");
 
@@ -69,23 +62,29 @@ class Navigation {
       link.classList.toggle("active", link.dataset.section === section)
     );
   }
+
   closeMobileMenu() {
     $(".nav-menu")?.classList.remove("active");
     state.isMenuOpen = false;
   }
 }
 
+// =============================================
+// CLASSE MOBILE MENU
+// =============================================
 class MobileMenu {
   constructor() {
     this.toggle = $(".nav-toggle");
     this.menu = $(".nav-menu");
     this.init();
   }
+
   init() {
     this.toggle?.addEventListener("click", () => {
       state.isMenuOpen = !state.isMenuOpen;
       this.menu?.classList.toggle("active", state.isMenuOpen);
     });
+
     document.addEventListener("click", (e) => {
       if (!e.target.closest(".nav") && state.isMenuOpen) {
         this.menu?.classList.remove("active");
@@ -95,10 +94,12 @@ class MobileMenu {
   }
 }
 
+// =============================================
+// CLASSE CONTACT FORM
+// =============================================
 class ContactForm {
   constructor(formId) {
     this.form = document.getElementById(formId);
-
     if (!this.form) return;
 
     this.fields = {
@@ -109,7 +110,6 @@ class ContactForm {
       personneNom: this.form.querySelector("#personne-nom"),
       personnePrenom: this.form.querySelector("#personne-prenom"),
       dateNaissance: this.form.querySelector("#date-naissance"),
-      classe: this.form.querySelector("#classe"),
       ville: this.form.querySelector("#ville"),
       message: this.form.querySelector("#message"),
       rgpd: this.form.querySelector("#rgpd"),
@@ -119,83 +119,74 @@ class ContactForm {
   }
 
   init() {
-    // Définir date max (aujourd'hui) pour date de naissance
-    const today = new Date().toISOString().split("T")[0];
-    if (this.fields.dateNaissance) {
-      this.fields.dateNaissance.setAttribute("max", today);
-    }
+    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
 
     // Validation en temps réel
     Object.values(this.fields).forEach((field) => {
-      if (!field) return;
-
-      field.addEventListener("blur", () => this.validateField(field));
-      field.addEventListener("input", () => {
-        if (field.getAttribute("aria-invalid") === "true") {
-          this.validateField(field);
-        }
-      });
+      if (field) {
+        field.addEventListener("blur", () => this.validateField(field));
+        field.addEventListener("input", () => this.clearError(field));
+      }
     });
-
-    // Soumission formulaire
-    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
   }
 
-  validateField(field) {
-    const value = field.value.trim();
-    const fieldName = field.name;
-    const errorElement = document.getElementById(`${field.id}-error`);
-    let isValid = true;
-    let errorMessage = "";
+  async handleSubmit(e) {
+    e.preventDefault();
 
-    // Validation champs requis
-    if (field.required && !value) {
-      isValid = false;
-      errorMessage = "Ce champ est obligatoire";
+    if (!this.validateForm()) {
+      return;
     }
 
-    // Validations spécifiques
-    else if (fieldName === "email" && value) {
-      if (!this.isValidEmail(value)) {
-        isValid = false;
-        errorMessage = "Email invalide (ex: nom@exemple.fr)";
-      }
-    } else if (fieldName === "telephone" && value) {
-      if (!this.isValidPhone(value)) {
-        isValid = false;
-        errorMessage = "Téléphone invalide (10 chiffres requis)";
-      }
-    } else if (fieldName === "date_naissance" && value) {
-      const birthDate = new Date(value);
-      const today = new Date();
-      const age = today.getFullYear() - birthDate.getFullYear();
+    this.showLoader();
 
-      if (birthDate > today) {
-        isValid = false;
-        errorMessage = "La date ne peut pas être dans le futur";
-      } else if (age > 18) {
-        isValid = false;
-        errorMessage = "Pour les adultes, contactez-moi directement";
-      }
-    } else if (field.type === "checkbox" && field.required && !field.checked) {
-      isValid = false;
-      errorMessage = "Vous devez accepter pour continuer";
+    try {
+      const templateParams = {
+        parent_nom: this.fields.parentNom.value.trim(),
+        parent_prenom: this.fields.parentPrenom.value.trim(),
+        email: this.fields.email.value.trim(),
+        telephone: this.fields.telephone.value.trim(),
+        personne_nom: this.fields.personneNom.value.trim(),
+        personne_prenom: this.fields.personnePrenom.value.trim(),
+        date_naissance: this.fields.dateNaissance.value.trim(),
+        classe:
+          this.form.querySelector("#classe")?.value.trim() || "Non renseigné",
+        ecole:
+          this.form.querySelector("#ecole")?.value.trim() || "Non renseigné",
+        ville: this.fields.ville.value.trim(),
+        type_demande:
+          this.form.querySelector("#type-demande")?.value || "Non renseigné",
+        message: this.fields.message.value.trim(),
+        source: this.form.querySelector("#source")?.value || "Non renseigné",
+        source_autre:
+          this.form.querySelector("#source-autre")?.value.trim() || "",
+        date_demande: new Date().toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+
+      await emailjs.send("service_do1z2ic", "template_sjc6l0i", templateParams);
+
+      this.showSuccess();
+      this.form.reset();
+    } catch (error) {
+      console.error("Erreur EmailJS:", error);
+      this.showError(
+        "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou me contacter directement."
+      );
+    } finally {
+      this.hideLoader();
     }
-
-    // Mise à jour UI
-    if (errorElement) {
-      errorElement.textContent = errorMessage;
-    }
-    field.setAttribute("aria-invalid", !isValid);
-
-    return isValid;
   }
 
   validateForm() {
     let isValid = true;
 
-    Object.values(this.fields).forEach((field) => {
-      if (field && field.required) {
+    Object.entries(this.fields).forEach(([key, field]) => {
+      if (field && field.hasAttribute("required")) {
         if (!this.validateField(field)) {
           isValid = false;
         }
@@ -205,59 +196,33 @@ class ContactForm {
     return isValid;
   }
 
-  async handleSubmit(e) {
-    e.preventDefault();
+  validateField(field) {
+    const value = field.value.trim();
+    const fieldName = field.getAttribute("name");
+    let errorMessage = "";
 
-    // Validation complète
-    if (!this.validateForm()) {
-      this.showError("Veuillez corriger les erreurs dans le formulaire");
-      // Focus sur premier champ invalide
-      const firstInvalid = this.form.querySelector('[aria-invalid="true"]');
-      if (firstInvalid) firstInvalid.focus();
-      return;
+    // Champs obligatoires
+    if (field.hasAttribute("required") && !value) {
+      errorMessage = "Ce champ est obligatoire";
     }
 
-    this.showLoader();
-
-    // Préparation données
-    const formData = {
-      parent_nom: this.fields.parentNom.value.trim(),
-      parent_prenom: this.fields.parentPrenom.value.trim(),
-      email: this.fields.email.value.trim(),
-      telephone: this.fields.telephone.value.trim(),
-      personne_nom: this.fields.personneNom.value.trim(),
-      personne_prenom: this.fields.personnePrenom.value.trim(),
-      date_naissance: this.fields.dateNaissance.value,
-      classe: this.fields.classe.value.trim() || "Non renseignée",
-      ville: this.fields.ville?.value.trim() || "Non renseignée",
-      message: this.fields.message.value.trim(),
-      date_demande: new Date().toLocaleDateString("fr-FR"),
-    };
-
-    try {
-      // Envoi EmailJS
-      const response = await emailjs.send(
-        config.emailjs.serviceId,
-        config.emailjs.templateId,
-        formData
-      );
-
-      if (response.status === 200) {
-        this.showSuccess();
-        this.form.reset();
-        // Reset aria-invalid
-        Object.values(this.fields).forEach((field) => {
-          if (field) field.setAttribute("aria-invalid", "false");
-        });
-      }
-    } catch (error) {
-      console.error("Erreur EmailJS:", error);
-      this.showError(
-        "Impossible d'envoyer votre message. Veuillez réessayer ou me contacter par téléphone."
-      );
-    } finally {
-      this.hideLoader();
+    // Validation email
+    if (field.type === "email" && value && !this.isValidEmail(value)) {
+      errorMessage = "Email invalide";
     }
+
+    // Validation téléphone
+    if (field.type === "tel" && value && !this.isValidPhone(value)) {
+      errorMessage = "Numéro invalide (ex: 06 12 34 56 78)";
+    }
+
+    // Checkbox RGPD
+    if (field.type === "checkbox" && field.id === "rgpd" && !field.checked) {
+      errorMessage = "Vous devez accepter la politique de confidentialité";
+    }
+
+    this.showFieldError(field, errorMessage);
+    return !errorMessage;
   }
 
   isValidEmail(email) {
@@ -267,6 +232,22 @@ class ContactForm {
   isValidPhone(phone) {
     const cleaned = phone.replace(/[\s\.\-\(\)]/g, "");
     return /^0[1-9]\d{8}$/.test(cleaned);
+  }
+
+  showFieldError(field, message) {
+    const errorSpan = document.getElementById(`${field.id}-error`);
+
+    if (message) {
+      field.classList.add("error");
+      if (errorSpan) errorSpan.textContent = message;
+    } else {
+      field.classList.remove("error");
+      if (errorSpan) errorSpan.textContent = "";
+    }
+  }
+
+  clearError(field) {
+    this.showFieldError(field, "");
   }
 
   showLoader() {
@@ -291,7 +272,6 @@ class ContactForm {
       "success"
     );
 
-    // Scroll vers message
     setTimeout(() => {
       const message = this.form.querySelector(".form-message");
       if (message) {
@@ -305,283 +285,20 @@ class ContactForm {
   }
 
   showMessage(text, type) {
-    // Supprimer message existant
     const existing = this.form.querySelector(".form-message");
     if (existing) existing.remove();
 
-    // Créer nouveau message
-    const message = document.createElement("div");
-    message.className = `form-message ${type}`;
-    message.innerHTML = text;
-    message.setAttribute("role", type === "error" ? "alert" : "status");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.textContent = text;
 
-    this.form.appendChild(message);
-
-    // Auto-suppression après 8s
-    setTimeout(() => message.remove(), 8000);
+    this.form.insertBefore(messageDiv, this.form.firstChild);
   }
 }
 
-// ============================================
-// 📸 GALERIE PHOTOS GÉNÉRIQUE (CABINET + PROFESSION)
-// ============================================
-class GalleryManager {
-  constructor(containerId, images) {
-    this.containerId = containerId;
-    this.currentIndex = 0;
-    this.images = images;
-    this.init();
-  }
-
-  init() {
-    this.galleryContainer = document.getElementById(this.containerId);
-    if (!this.galleryContainer) return;
-
-    this.mainImage = this.galleryContainer.querySelector(".gallery-main-image");
-    this.captionText = this.galleryContainer.querySelector(".caption-text");
-    this.indicators = this.galleryContainer.querySelectorAll(".indicator");
-
-    // Navigation buttons
-    const prevBtn = this.galleryContainer.querySelector(".gallery-prev");
-    const nextBtn = this.galleryContainer.querySelector(".gallery-next");
-
-    if (prevBtn) prevBtn.addEventListener("click", () => this.navigate(-1));
-    if (nextBtn) nextBtn.addEventListener("click", () => this.navigate(1));
-
-    // Indicators
-    this.indicators.forEach((indicator, index) => {
-      indicator.addEventListener("click", () => this.goToSlide(index));
-    });
-
-    // Keyboard navigation (global, mais vérifie visibilité)
-    document.addEventListener("keydown", (e) => {
-      if (!this.isGalleryVisible()) return;
-      if (e.key === "ArrowLeft") this.navigate(-1);
-      if (e.key === "ArrowRight") this.navigate(1);
-    });
-
-    // Touch swipe support
-    this.setupTouchSwipe();
-
-    // Lazy loading
-    this.setupLazyLoading();
-
-    // Preload images
-    this.preloadImages();
-  }
-
-  navigate(direction) {
-    this.currentIndex += direction;
-    if (this.currentIndex < 0) this.currentIndex = this.images.length - 1;
-    if (this.currentIndex >= this.images.length) this.currentIndex = 0;
-    this.updateGallery();
-  }
-
-  goToSlide(index) {
-    this.currentIndex = index;
-    this.updateGallery();
-  }
-
-  updateGallery() {
-    const currentImage = this.images[this.currentIndex];
-
-    // Fade out
-    this.mainImage.style.opacity = "0";
-
-    setTimeout(() => {
-      // Update image
-      this.mainImage.src = currentImage.src;
-      this.mainImage.alt = currentImage.alt;
-
-      // Update caption
-      if (this.captionText) {
-        this.captionText.textContent = currentImage.caption;
-      }
-
-      // Update indicators
-      this.indicators.forEach((indicator, index) => {
-        indicator.classList.toggle("active", index === this.currentIndex);
-      });
-
-      // Fade in
-      this.mainImage.style.opacity = "1";
-    }, 150);
-  }
-
-  setupTouchSwipe() {
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    this.galleryContainer.addEventListener("touchstart", (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    this.galleryContainer.addEventListener("touchend", (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      this.handleSwipe(touchStartX, touchEndX);
-    });
-  }
-
-  handleSwipe(startX, endX) {
-    const swipeThreshold = 50;
-    const diff = startX - endX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        this.navigate(1); // Swipe left - next
-      } else {
-        this.navigate(-1); // Swipe right - previous
-      }
-    }
-  }
-
-  setupLazyLoading() {
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.add("loaded");
-          imageObserver.unobserve(img);
-        }
-      });
-    });
-
-    if (this.mainImage) {
-      imageObserver.observe(this.mainImage);
-    }
-  }
-
-  preloadImages() {
-    this.images.forEach((imageData, index) => {
-      if (index === 0) return; // Skip first image (already loaded)
-      const img = new Image();
-      img.src = imageData.src;
-    });
-  }
-
-  isGalleryVisible() {
-    const section = this.galleryContainer.closest(".section");
-    if (!section) return false;
-    return section.style.display !== "none";
-  }
-}
-
-class SEO {
-  constructor() {
-    this.init();
-  }
-  init() {
-    $$(".nav-link").forEach((link) =>
-      link.addEventListener("click", () =>
-        this.updatePageTitle(link.dataset.section)
-      )
-    );
-    this.addStructuredData();
-  }
-  updatePageTitle(section) {
-    const titles = {
-      accueil:
-        "Edwina Decherf - Ergothérapeute spécialisée enfants et personnes âgées",
-      profession: "L'ergothérapie - Accompagnement autonomie quotidienne",
-      cabinet: "Cabinet Ergothérapie - Consultations et Visites domicile",
-      formations: "Formations spécialisées - TSA, Troubles apprentissages",
-      tarifs: "Tarifs Ergothérapeute - Bilans, Séances, Consultations",
-      contact: "Contact Edwina Decherf - Prise de rendez-vous Ergothérapeute",
-    };
-    document.title = titles[section] || titles.accueil;
-    const descriptions = {
-      accueil:
-        "Edwina Decherf, ergothérapeute diplômée depuis 2011, spécialisée pédiatrie et gériatrie. Consultations libérales, bilans, rééducation troubles apprentissages.",
-      profession:
-        "Découvrez l'ergothérapie : accompagnement vers l'autonomie, évaluation capacités, adaptation environnement, rééducation personnalisée.",
-      cabinet:
-        "Cabinet ergothérapie accessible. Consultations enfants et personnes âgées, visites domicile et établissements, matériel spécialisé.",
-      formations:
-        "Formation continue ergothérapie : TSA, troubles apprentissages, habiletés visuelles, motricité fine pédiatrie, neurodéveloppement.",
-      tarifs:
-        "Tarifs ergothérapeute : bilans 155€, séances 42€, consultations domicile, évaluations aides techniques. Prescription médicale obligatoire.",
-      contact:
-        "Prenez rendez-vous avec Edwina Decherf, ergothérapeute. Email: edwinadecherf@gmail.com, Tel: 06 32 62 95 11. Formulaire en ligne.",
-    };
-    let metaDesc = $('meta[name="description"]');
-    if (metaDesc)
-      metaDesc.setAttribute(
-        "content",
-        descriptions[section] || descriptions.accueil
-      );
-  }
-  addStructuredData() {
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      name: "Edwina Decherf - Ergothérapeute D.E.",
-      description:
-        "Ergothérapeute diplômée d'État spécialisée en pédiatrie et gériatrie, consultations libérales et interventions à domicile",
-      url: "https://votre-domaine.com",
-      email: "edwinadecherf@gmail.com",
-      telephone: "+33632629511",
-      medicalSpecialty: "Occupational Therapy",
-      serviceType: "Ergothérapie",
-      areaServed: "France",
-      availableLanguage: "French",
-      paymentAccepted: ["Cash", "Check"],
-      currenciesAccepted: "EUR",
-      priceRange: "42€-155€",
-      foundingDate: "2011",
-      knowsAbout: [
-        "Troubles du Spectre Autistique",
-        "Troubles des apprentissages",
-        "Motricité fine pédiatrie",
-        "Habiletés visuelles",
-        "Gériatrie",
-        "Adaptation domicile",
-      ],
-      hasCredential: {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "Diplôme d'État",
-        educationalLevel: "Bachelor",
-        recognizedBy: {
-          "@type": "Organization",
-          name: "École d'ergothérapie de Berck-sur-Mer",
-        },
-      },
-      memberOf: [
-        {
-          "@type": "Organization",
-          name: "ANFE - Association Nationale Française des Ergothérapeutes",
-        },
-      ],
-      makesOffer: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Bilan ergothérapique complet",
-            description: "Évaluation complète des capacités et difficultés",
-          },
-          price: "155",
-          priceCurrency: "EUR",
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Séance d'ergothérapie",
-            description: "Séance individuelle 45 minutes",
-          },
-          price: "42",
-          priceCurrency: "EUR",
-        },
-      ],
-    };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
-  }
-}
-
+// =============================================
+// CLASSE CITY AUTOCOMPLETE
+// =============================================
 class CityAutocomplete {
   constructor(inputId) {
     this.input = document.getElementById(inputId);
@@ -647,29 +364,34 @@ class CityAutocomplete {
     this.suggestionsBox.innerHTML = cities
       .map(
         (city, index) => `
-        <div class="autocomplete-item" role="option" data-index="${index}">
-          <strong>${city.name}</strong> (${city.postalCode}) - ${city.dept}
-        </div>
-      `
+      <div class="autocomplete-item" data-index="${index}">
+        <strong>${city.name}</strong> (${city.postalCode}) - ${city.dept}
+      </div>
+    `
       )
       .join("");
+
+    this.suggestionsBox.classList.add("active");
 
     this.suggestionsBox
       .querySelectorAll(".autocomplete-item")
       .forEach((item) => {
-        item.addEventListener("click", () =>
-          this.selectCity(parseInt(item.dataset.index))
-        );
+        item.addEventListener("click", () => {
+          const index = parseInt(item.dataset.index);
+          this.selectCity(index);
+        });
       });
+  }
 
-    this.suggestionsBox.classList.add("active");
+  hideSuggestions() {
+    this.suggestionsBox.classList.remove("active");
     this.selectedIndex = -1;
   }
 
   handleKeyboard(e) {
-    const items = this.suggestionsBox.querySelectorAll(".autocomplete-item");
-
     if (!this.suggestionsBox.classList.contains("active")) return;
+
+    const items = this.suggestionsBox.querySelectorAll(".autocomplete-item");
 
     switch (e.key) {
       case "ArrowDown":
@@ -680,7 +402,7 @@ class CityAutocomplete {
 
       case "ArrowUp":
         e.preventDefault();
-        this.selectedIndex = Math.max(this.selectedIndex - 1, -1);
+        this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
         this.updateSelection(items);
         break;
 
@@ -705,95 +427,270 @@ class CityAutocomplete {
 
   selectCity(index) {
     const city = this.cities[index];
-    this.input.value = `${city.name} (${city.postalCode})`;
-    this.hideSuggestions();
-  }
-
-  hideSuggestions() {
-    this.suggestionsBox.classList.remove("active");
-    this.selectedIndex = -1;
+    if (city) {
+      this.input.value = `${city.name} (${city.postalCode})`;
+      this.hideSuggestions();
+    }
   }
 }
 
-class App {
+// =============================================
+// CLASSE SEO
+// =============================================
+class SEO {
   constructor() {
-    this.navigation = new Navigation();
-    this.mobileMenu = new MobileMenu();
-    this.contactForm = new ContactForm("contact-form");
-    this.seo = new SEO();
+    this.updateMetaTags("accueil");
+    this.addStructuredData();
+  }
+
+  updateMetaTags(section) {
+    const titles = {
+      accueil: "Edwina Decherf - Ergothérapeute D.E. | Pédiatrie & Gériatrie",
+      profession: "Qu'est-ce que l'ergothérapie ? | Edwina Decherf",
+      cabinet: "Le Cabinet | Consultations & Localisation",
+      formations: "Formations & Expertise | Formation Continue",
+      tarifs: "Tarifs & Modalités | Consultations Ergothérapie",
+      contact: "Contact & Rendez-vous | Edwina Decherf",
+    };
+
+    const descriptions = {
+      accueil:
+        "Ergothérapeute diplômée depuis 2011, spécialisée pédiatrie et gériatrie. Consultations libérales, bilans, rééducation TSA et troubles apprentissages.",
+      profession:
+        "L'ergothérapie améliore l'autonomie quotidienne enfants et personnes âgées. Interventions école, domicile, établissements spécialisés.",
+      cabinet:
+        "Cabinet ergothérapie Saint-Gervais-les-Trois-Clochers (86). Consultations mardi/mercredi, évaluations domicile personnes âgées.",
+      formations:
+        "Formation continue ergothérapie : TSA, troubles apprentissages, habiletés visuelles, motricité fine pédiatrie, neurodéveloppement.",
+      tarifs:
+        "Tarifs ergothérapeute : bilans 155€, séances 42€, consultations domicile, évaluations aides techniques. Prescription médicale obligatoire.",
+      contact:
+        "Prenez rendez-vous avec Edwina Decherf, ergothérapeute. Email: edwinadecherf@gmail.com, Tel: 06 32 62 95 11. Formulaire en ligne.",
+    };
+
+    document.title = titles[section] || titles.accueil;
+
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        descriptions[section] || descriptions.accueil
+      );
+    }
+  }
+
+  addStructuredData() {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "MedicalBusiness",
+      name: "Edwina Decherf - Ergothérapeute D.E.",
+      description:
+        "Ergothérapeute diplômée d'État spécialisée en pédiatrie et gériatrie, consultations libérales et interventions à domicile",
+      url: "https://votre-domaine.com",
+      email: "edwinadecherf@gmail.com",
+      telephone: "+33632629511",
+      medicalSpecialty: "Occupational Therapy",
+      serviceType: "Ergothérapie",
+      areaServed: "France",
+      availableLanguage: "French",
+      paymentAccepted: ["Cash", "Check"],
+      currenciesAccepted: "EUR",
+      priceRange: "42€-155€",
+      foundingDate: "2011",
+      knowsAbout: [
+        "Troubles du Spectre Autistique",
+        "Troubles des apprentissages",
+        "Motricité fine pédiatrie",
+      ],
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+  }
+}
+
+// =============================================
+// CLASSE GALLERY MANAGER
+// =============================================
+class GalleryManager {
+  constructor(containerId, images) {
+    this.container = document.getElementById(containerId);
+    if (!this.container) return;
+
+    this.images = images;
+    this.currentIndex = 0;
     this.init();
   }
+
   init() {
-    document.readyState === "loading"
-      ? document.addEventListener("DOMContentLoaded", () => this.onReady())
-      : this.onReady();
+    this.render();
+    this.attachEvents();
   }
-  onReady() {
-    setTimeout(() => {
-      document.body.classList.remove("loading");
-      document.body.classList.add("loaded");
-      state.isLoading = false;
-    }, 100);
 
-    new CityAutocomplete("ville");
+  render() {
+    this.container.innerHTML = `
+      <div class="gallery-main">
+        <img 
+          src="${this.images[0].src}" 
+          alt="${this.images[0].alt}"
+          class="gallery-image"
+          loading="lazy"
+        >
+        <button class="gallery-btn prev" aria-label="Image précédente">‹</button>
+        <button class="gallery-btn next" aria-label="Image suivante">›</button>
+      </div>
+      <div class="gallery-indicators">
+        ${this.images
+          .map(
+            (_, i) =>
+              `<span class="indicator ${
+                i === 0 ? "active" : ""
+              }" data-index="${i}"></span>`
+          )
+          .join("")}
+      </div>
+      <p class="gallery-caption">${this.images[0].caption}</p>
+    `;
+  }
 
-    // ============================================
-    // 📸 INITIALISATION GALERIES
-    // ============================================
+  attachEvents() {
+    // Boutons précédent/suivant
+    this.container
+      .querySelector(".prev")
+      .addEventListener("click", () => this.prev());
+    this.container
+      .querySelector(".next")
+      .addEventListener("click", () => this.next());
 
-    // Galerie Cabinet (5 photos)
-    const cabinetGallery = new GalleryManager("cabinetGallery", [
-      {
-        src: "images/photos/entree_7_11zon.webp",
-        alt: "Entrée de la Maison médicale",
-        caption: "Entrée de la Maison médicale",
-      },
-      {
-        src: "images/photos/materiel2_9_11zon.webp",
-        alt: "Matériel spécialisé ergothérapie",
-        caption: "Jouets et matériel spécialisé",
-      },
-      {
-        src: "images/photos/cabinet2_2_11zon.webp",
-        alt: "Bureau de consultation ergothérapie",
-        caption: "Bureau de consultation",
-      },
-      {
-        src: "images/photos/materiel3_10_11zon.webp",
-        alt: "Matériel spécialisé ergothérapie",
-        caption: "Jouets et matériel spécialisé",
-      },
-      {
-        src: "images/photos/cabinet3_3_11zon.webp",
-        alt: "Coin activités pour enfants",
-        caption: "Coin activités pour enfants",
-      },
-      {
-        src: "images/photos/materiel1_8_11zon.webp",
-        alt: "Matériel spécialisé ergothérapie",
-        caption: "Jouets et matériel spécialisé",
-      },
-    ]);
+    // Indicateurs cliquables
+    this.container.querySelectorAll(".indicator").forEach((indicator) => {
+      indicator.addEventListener("click", (e) => {
+        const index = parseInt(e.target.dataset.index);
+        this.goTo(index);
+      });
+    });
 
-    // Galerie Profession (2 photos action)
-    const professionGallery = new GalleryManager("professionGallery", [
-      {
-        src: "images/photos/action-enfant.webp",
-        alt: "Ergothérapie pédiatrique - Accompagnement enfant",
-        caption: "Accompagnement en ergothérapie pédiatrique",
-      },
-      {
-        src: "images/photos/action-senior.webp",
-        alt: "Ergothérapie gériatrique - Accompagnement personne âgée",
-        caption: "Accompagnement en ergothérapie gériatrique",
-      },
-    ]);
+    // Navigation clavier
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") this.prev();
+      if (e.key === "ArrowRight") this.next();
+    });
 
-    if ("serviceWorker" in navigator)
-      navigator.serviceWorker
-        .register("/sw.js")
-        .catch(() => console.log("Service Worker non disponible"));
+    // Swipe tactile
+    let startX = 0;
+    const img = this.container.querySelector(".gallery-image");
+
+    img.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    img.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        diff > 0 ? this.next() : this.prev();
+      }
+    });
+  }
+
+  prev() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.updateImage();
+  }
+
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    this.updateImage();
+  }
+
+  goTo(index) {
+    this.currentIndex = index;
+    this.updateImage();
+  }
+
+  updateImage() {
+    const img = this.container.querySelector(".gallery-image");
+    const caption = this.container.querySelector(".gallery-caption");
+    const indicators = this.container.querySelectorAll(".indicator");
+
+    img.src = this.images[this.currentIndex].src;
+    img.alt = this.images[this.currentIndex].alt;
+    caption.textContent = this.images[this.currentIndex].caption;
+
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle("active", i === this.currentIndex);
+    });
   }
 }
 
-new App();
+// =============================================
+// INITIALISATION AU CHARGEMENT
+// =============================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialisation modules principaux
+  new Navigation();
+  new MobileMenu();
+  new ContactForm("contact-form");
+  new CityAutocomplete("ville");
+  new SEO();
+
+  // Initialisation EmailJS
+  emailjs.init("atEnZgePdH88zB9jU");
+
+  // Galerie Cabinet
+  const cabinetGallery = new GalleryManager("cabinetGallery", [
+    {
+      src: "images/photos/entree_7_11zon.webp",
+      alt: "Entrée de la Maison médicale",
+      caption: "Entrée de la Maison médicale",
+    },
+    {
+      src: "images/photos/materiel2_9_11zon.webp",
+      alt: "Matériel spécialisé ergothérapie",
+      caption: "Jouets et matériel spécialisé",
+    },
+    {
+      src: "images/photos/cabinet2_2_11zon.webp",
+      alt: "Bureau de consultation ergothérapie",
+      caption: "Bureau de consultation",
+    },
+    {
+      src: "images/photos/materiel3_10_11zon.webp",
+      alt: "Matériel spécialisé ergothérapie",
+      caption: "Jouets et matériel spécialisé",
+    },
+    {
+      src: "images/photos/cabinet3_3_11zon.webp",
+      alt: "Coin activités pour enfants",
+      caption: "Coin activités pour enfants",
+    },
+    {
+      src: "images/photos/materiel1_8_11zon.webp",
+      alt: "Matériel spécialisé ergothérapie",
+      caption: "Jouets et matériel spécialisé",
+    },
+  ]);
+
+  const selectSource = document.getElementById("source");
+  const autreGroup = document.getElementById("source-autre-group");
+  const autreInput = document.getElementById("source-autre");
+
+  if (selectSource && autreGroup) {
+    selectSource.addEventListener("change", (e) => {
+      if (e.target.value === "autre") {
+        autreGroup.style.display = "block";
+        autreInput.focus();
+      } else {
+        autreGroup.style.display = "none";
+        autreInput.value = ""; // Reset
+      }
+    });
+  }
+
+  // Retirer classe loading
+  document.body.classList.remove("loading");
+});
